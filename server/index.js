@@ -31,6 +31,7 @@ app.use( session({
 }))
 
 //ENDPOINTS
+app.post('/api/login', controllers.login);
 app.post('/api/create-user', controllers.createUser);
 
 

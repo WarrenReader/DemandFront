@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './Login.css';
 import Logo from './logo.png';
 
@@ -10,14 +11,14 @@ export default class Login extends React.Component {
          password: ''
       }
 
-      this.handleFormSubmit = this.handleFormSubmit.bind(this);
+      this.handleLogin = this.handleLogin.bind(this);
    }
 
-   handleFormSubmit(e) {
+   handleLogin(e) {
       e.preventDefault();
       const {username, password} = this.state;
 
-      console.log(username, password)
+      axios.post('/api/login', {username, password}).then((res) => {})
    }
 
    render() {
@@ -30,7 +31,7 @@ export default class Login extends React.Component {
 
                <img src={Logo} alt="Logo" className="login-logo"/>
 
-               <form className="login-fields-container" onSubmit={this.handleFormSubmit}>
+               <form className="login-fields-container" onSubmit={this.handleLogin}>
 
                   <div className="login-field-container raleway">
                      <span className="login-field-title raleway">Username</span>

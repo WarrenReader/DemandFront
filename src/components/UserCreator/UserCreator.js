@@ -22,10 +22,12 @@ export default class UserCreator extends React.Component {
 
       axios.post('/api/create-user', {username, password}).then(res => {
          if(res.data.status) {
+            console.log(res);
             this.setState({
-               status: "Username Already Exists"
+               status: "User Not Created"
             })
          } else {
+            console.log(res);
             this.setState({
                status: "User Created"
             })
