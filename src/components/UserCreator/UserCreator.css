@@ -16,3 +16,9 @@
    opacity: 0.4;
    margin-bottom: 60px;
 }
+
+.user-created-status {
+   margin-top: -15px;
+   margin-bottom: 15px;
+   color: rgb(217, 221, 21);
+}

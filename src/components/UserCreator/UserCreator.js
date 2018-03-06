@@ -8,7 +8,8 @@ export default class UserCreator extends React.Component {
       super()
       this.state = {
          username: '',
-         password: ''
+         password: '',
+         status: ''
       }
 
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -16,16 +17,25 @@ export default class UserCreator extends React.Component {
 
    handleFormSubmit(e) {
       e.preventDefault();
-      const {username, password} = this.state;
+      let {username, password} = this.state;
+      username = username.toLowerCase();
 
-      axios.post('/api/create-user', {username, password}).then(res => console.log(res))
-
-      console.log(username, password)
+      axios.post('/api/create-user', {username, password}).then(res => {
+         if(res.data.status) {
+            this.setState({
+               status: "Username Already Exists"
+            })
+         } else {
+            this.setState({
+               status: "User Created"
+            })
+         }
+      })
    }
 
    render() {
 
-      let {username, password} = this.state;
+      let {username, password, status} = this.state;
 
       return(
          <div className="create-user-parent-container">
@@ -34,7 +44,7 @@ export default class UserCreator extends React.Component {
                <img src={Logo} alt="Logo" className="create-user-logo"/>
 
                <form className="login-fields-container" onSubmit={this.handleFormSubmit}>
-
+                  {status && <div className="user-created-status raleway">{status}</div>}
                   <div className="login-field-container raleway">
                      <span className="login-field-title raleway">New Username</span>
                      <input 
