@@ -18,10 +18,22 @@ module.exports = {
 
    login: (req, res) => {
       const {username, password} = req.body;
-      console.log(username, password);
+      const db = req.app.get('db');
+      
+      db.retrieve_user([username]).then(result => {
+         if(result.length > 0) {
+            const dbPassword = result[0].password;
+            let bResult = bcrypt.compareSync(password, dbPassword);
+            console.log(bResult)
 
-      let salt = bcrypt.genSaltSync(10);
-      let hash = bcrypt.hashSync(password, salt); 
+         } else {
+            res.status(200).send({status: "Nonexistent"})
+         }
+
+      })
+
+
+
 
    }
 }
