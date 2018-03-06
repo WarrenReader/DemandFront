@@ -1,0 +1,18 @@
+.create-user-parent-container {
+   width: 100%;
+   min-width: 300px;
+   height:100%;
+   min-height: 550px;
+   display: flex;
+   justify-content:center;
+   align-items: center;
+   background: linear-gradient(25deg, #393d41, #b42aa2);
+}
+
+.create-user-logo{
+   width: 65%;
+   max-width: 220px;
+   min-width: 150px;
+   opacity: 0.4;
+   margin-bottom: 60px;
+}
