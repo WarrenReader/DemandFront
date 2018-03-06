@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './components/Login/Login.js';
+import routes from './routes/routes.js';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Login />
+        {routes}
       </div>
     );
   }
 }
-
-export default App;
