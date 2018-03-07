@@ -6,39 +6,38 @@ const express = require('express')
    , session = require('express-session')
 	, passport = require('passport')
 	, LocalStrategy = require('passport-local').Strategy
-	, cookieParser = require('cookie-parser')
 	, bcrypt = require('bcryptjs')
 	, cors = require('cors');
 
 
-const app = express();
-
-//VARAIBLES FROM .env
-const {SESSION_PORT
-      , CONNECTION_STRING
-		, SESSION_SECRET
-		, DOMAIN
-		, CLIENT_ID
-		, CLIENT_SECRET
-		, CALLBACK_URL} = process.env;
-
 //IMPORTING CONTROLLERS
 const controllers = require('./controllers/controllers.js');
+
+
+//SETUP APP
+const app = express();
+
+
+//IMPORTING VARAIBLES FROM .env
+const {SESSION_PORT
+      , CONNECTION_STRING
+		, SESSION_SECRET} = process.env;
+
 
 //CONNECT DATABASE
 massive(CONNECTION_STRING).then(db => {
 	app.set('db', db)
 })
 
+
 //MIDDLEWARE
 app.use(bodyParser.json());
-app.use(cookieParser());
-app.use( session({
+app.use( session({		//ADDED TO REQ.SESSION
    secret: SESSION_SECRET
    , resave: false
-   , saveUninitialized: false
+	, saveUninitialized: false
+	, cookie: {maxAge: 1000000}
 }))
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -51,11 +50,11 @@ passport.use(new LocalStrategy(
 			const user = result[0];
 
 			//VERIFY USERNAME EXISTS
-			if(!user) {console.log('Does Not Exist'); return done(null, false)}
+			if(!user) {return done(null, 'Unauthorized')}
 			
 			//VERIFY PASSWORD MATCHES
 			const validPassword = bcrypt.compareSync(password, user.password);
-			if(!validPassword) {console.log('Wrong Password'); return done(null, false)}
+			if(!validPassword) {return done(null, 'Unauthorized')}
 
 			//USER IS VERIFIED AND ThEIR ID IS RETURNED
 			return done(null, user.id)
@@ -64,15 +63,18 @@ passport.use(new LocalStrategy(
 	}
 ))
 
-
 passport.serializeUser((id, done) => {
 	return done(null, id)
 });
 
-
 passport.deserializeUser((id, done) => {
+	if(id === "Unauthorized") {
+		return done(null, 'Unauthorized');
+	}
+
 	app.get('db').retrieve_user_by_id([id]).then(result => {
 		const user = result[0];
+		console.log(user);
 		return done(null, user);
 	})
 });
@@ -81,13 +83,25 @@ passport.deserializeUser((id, done) => {
 
 
 //ENDPOINTS
+app.post('/api/login', passport.authenticate('local'), (req, res, next) => {
+	if(req.user === 'Unauthorized') {
+		res.status(200).send(req.user)
+	} else {
+		res.redirect(200, '/dashboard')
+	}
+
+	next();
+
+});
 
 
-// app.post('/api/login', passport.authenticate('local', {successRedirect: '/#/dashboard', failureRedirect: '/error'}));
-
-// app.post('/api/login', passport.authenticate('local'), function(req, res) {
-// 	console.log('passport user', req.user);
-// });
+app.get('/auth/me', (req, res) => {
+   if (req.user) {
+      res.status(200).send(req.user);
+   } else {
+      res.status(401).send('Nice Try.');
+   }
+})
 
 
 

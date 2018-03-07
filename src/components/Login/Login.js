@@ -8,7 +8,8 @@ export default class Login extends React.Component {
       super()
       this.state = {
          username: '',
-         password: ''
+         password: '',
+         status: ''
       }
 
       this.handleLogin = this.handleLogin.bind(this);
@@ -18,12 +19,21 @@ export default class Login extends React.Component {
       e.preventDefault();
       const {username, password} = this.state;
 
-      axios.post('/api/login', {username, password}).then(res => console.log(res))
+      axios.post('/api/login', {username, password}).then(res => {
+         if(res.data === 'Unauthorized') {
+            this.setState({
+               status: res.data
+            })
+         }
+         
+         this.props.history.push(res.headers.location) //REDIRECT IF LOGGED IN
+
+      })  
    }
 
    render() {
 
-      let {username, password} = this.state;
+      let {username, password, status} = this.state;
 
       return(
          <div className="login-parent-container">
@@ -32,6 +42,8 @@ export default class Login extends React.Component {
                <img src={Logo} alt="Logo" className="login-logo"/>
 
                <form className="login-fields-container" onSubmit={this.handleLogin}>
+
+                  <div className="login-status-div">{status && <div className='login-status raleway'>{status}</div>}</div>
 
                   <div className="login-field-container raleway">
                      <span className="login-field-title raleway">Username</span>
