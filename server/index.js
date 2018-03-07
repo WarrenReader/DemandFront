@@ -4,64 +4,90 @@ const express = require('express')
    , bodyParser = require('body-parser')
    , massive = require('massive')
    , session = require('express-session')
-   , bcrypt = require('bcryptjs')
-   , passport = require('passport')
-   , localStrategy = require('passport-local').Strategy
+	, passport = require('passport')
+	, LocalStrategy = require('passport-local').Strategy
+	, cookieParser = require('cookie-parser')
+	, bcrypt = require('bcryptjs')
+	, cors = require('cors');
 
-//IMPORT CONTROLLERS
-const controllers = require('./controllers/controllers.js');
 
+const app = express();
 
 //VARAIBLES FROM .env
 const {SESSION_PORT
       , CONNECTION_STRING
-      , SESSION_SECRET} = process.env;
+		, SESSION_SECRET
+		, DOMAIN
+		, CLIENT_ID
+		, CLIENT_SECRET
+		, CALLBACK_URL} = process.env;
 
+//IMPORTING CONTROLLERS
+const controllers = require('./controllers/controllers.js');
 
 //CONNECT DATABASE
 massive(CONNECTION_STRING).then(db => {
-   app.set('db', db)
+	app.set('db', db)
 })
 
-const app = express();
+//MIDDLEWARE
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use( session({
    secret: SESSION_SECRET
    , resave: false
    , saveUninitialized: false
-   , cookie: {maxAge: 1800000}
 }))
 
-//PASSPORT LOCAL STRATEGY
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//PASSPORT LOCAL STRATEGY
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-      User.getUserByUsername(username, function(err, user){
-         if(err) throw err;
-         if(!user){
-            return done(null, false, {message: 'Unknown User'});
-         }
-         
-         User.comparePassword(password, user.password, function(err, isMatch){
-            if(err) throw err;
-            if(isMatch){
-               return done(null, user);
-            } else {
-               return done(null, false, {message: 'Invalid password'})
-            }
-         })
-      })
-   
-  }));
+	function(username, password, done) {
+		app.get('db').retrieve_user([username]).then(result =>{
+			const user = result[0];
+
+			//VERIFY USERNAME EXISTS
+			if(!user) {console.log('Does Not Exist'); return done(null, false)}
+			
+			//VERIFY PASSWORD MATCHES
+			const validPassword = bcrypt.compareSync(password, user.password);
+			if(!validPassword) {console.log('Wrong Password'); return done(null, false)}
+
+			//USER IS VERIFIED AND ThEIR ID IS RETURNED
+			return done(null, user.id)
+
+		})
+	}
+))
+
+
+passport.serializeUser((id, done) => {
+	return done(null, id)
+});
+
+
+passport.deserializeUser((id, done) => {
+	app.get('db').retrieve_user_by_id([id]).then(result => {
+		const user = result[0];
+		return done(null, user);
+	})
+});
+
 
 
 
 //ENDPOINTS
-app.post('/api/login', passport.authenticate('local', {successRedirect: '/success', failureRedirect: '/fail'}), (req, res) => {
-   res.redirect('/success');
-});
 
-app.post('/api/create-user', controllers.createUser);
+
+// app.post('/api/login', passport.authenticate('local', {successRedirect: '/#/dashboard', failureRedirect: '/error'}));
+
+// app.post('/api/login', passport.authenticate('local'), function(req, res) {
+// 	console.log('passport user', req.user);
+// });
 
 
 

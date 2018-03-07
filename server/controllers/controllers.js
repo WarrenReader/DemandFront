@@ -15,25 +15,17 @@ module.exports = {
       ).catch(() => res.status(200).send({status: 'Duplicate'}));
    },
 
-
    login: (req, res) => {
       const {username, password} = req.body;
       const db = req.app.get('db');
-      
+      console.log(req.session);
+
       db.retrieve_user([username]).then(result => {
-         if(result.length > 0) {
-            const dbPassword = result[0].password;
-            let bResult = bcrypt.compareSync(password, dbPassword);
-            console.log(bResult)
-
-         } else {
-            res.status(200).send({status: "Nonexistent"})
-         }
-
+         
+         
+         res.status(200).send(result)
       })
-
-
-
-
+   
    }
+
 }
