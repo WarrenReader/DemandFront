@@ -56,7 +56,7 @@ passport.use(new LocalStrategy(
 			const validPassword = bcrypt.compareSync(password, user.password);
 			if(!validPassword) {return done(null, 'Unauthorized')}
 
-			//USER IS VERIFIED AND ThEIR ID IS RETURNED
+			//USER IS VERIFIED AND THEIR ID IS RETURNED
 			return done(null, user.id)
 
 		})
@@ -74,7 +74,6 @@ passport.deserializeUser((id, done) => {
 
 	app.get('db').retrieve_user_by_id([id]).then(result => {
 		const user = result[0];
-		console.log(user);
 		return done(null, user);
 	})
 });

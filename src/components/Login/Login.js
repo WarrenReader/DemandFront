@@ -1,8 +1,12 @@
+//MODULES
 import React from 'react';
 import axios from 'axios';
-import './Login.css';
-import Logo from './logo.png';
 
+//CSS AND ASSETS
+import './Login.css';
+import logo from './logo.png';
+
+//COMPONENT
 export default class Login extends React.Component {
    constructor() {
       super()
@@ -40,7 +44,7 @@ export default class Login extends React.Component {
          <div className="login-parent-container">
             <div className="login-child-container">
 
-               <img src={Logo} alt="Logo" className="login-logo"/>
+               <img src={logo} alt="Logo" className="login-logo"/>
 
                <form className="login-fields-container" onSubmit={this.handleLogin}>
 
