@@ -17,7 +17,8 @@ export default class Login extends React.Component {
 
    handleLogin(e) {
       e.preventDefault();
-      const {username, password} = this.state;
+      let {username, password} = this.state;
+      username = username.toLowerCase();
 
       axios.post('/api/login', {username, password}).then(res => {
          if(res.data === 'Unauthorized') {

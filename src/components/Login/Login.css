@@ -6,7 +6,7 @@
    display: flex;
    justify-content:center;
    align-items: center;
-   background: linear-gradient(25deg, #393d41, #0b7579);
+   background: linear-gradient(25deg, #393d41, #2c83e6);
 }
 
 .login-child-container {
@@ -21,7 +21,7 @@
 
 .login-logo {
    width: 65%;
-   max-width: 220px;
+   max-width: 200px;
    min-width: 150px;
    opacity: 0.4;
    margin-bottom: 60px;

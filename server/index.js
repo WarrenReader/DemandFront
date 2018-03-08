@@ -103,6 +103,7 @@ app.get('/auth/me', (req, res) => {
    }
 })
 
+app.post('/api/create-user', controllers.createUser)
 
 
 //SERVER LISTENING

@@ -13,19 +13,6 @@ module.exports = {
       db.create_new_user([username, hash]).then(result =>
          res.status(200).send(result)
       ).catch(() => res.status(200).send({status: 'Duplicate'}));
-   },
-
-   login: (req, res) => {
-      const {username, password} = req.body;
-      const db = req.app.get('db');
-      console.log(req.session);
-
-      db.retrieve_user([username]).then(result => {
-         
-         
-         res.status(200).send(result)
-      })
-   
    }
-
+   
 }
