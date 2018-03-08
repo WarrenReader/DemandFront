@@ -93,12 +93,17 @@ app.post('/api/login', passport.authenticate('local'), (req, res, next) => {
 
 });
 
+app.get('/logout', (req,res) => {
+	req.logout();
+	res.redirect(200, '/');
+})
+
 
 app.get('/auth/me', (req, res) => {
    if (req.user) {
       res.status(200).send(req.user);
    } else {
-      res.status(401).send('Nice Try.');
+      res.status(401).send('Not Logged In');
    }
 })
 

@@ -1,29 +1,20 @@
+//MODULES
 import React from 'react';
-import {connect} from 'react-redux';
-// import {getUser} from '../../redux/reducer.js';
+
+//CSS, ASSETS
 import './Dashboard.css';
+
+//IMPORT COMPONENTS
 import Header from '../Header/Header.js';
 
-export default class Dashboard extends React.Component {
-
-   // componentDidMount() {
-   //    this.props.getUser();
-   // }
-
-   
-   render() {
+//COMPONENT
+const Dashboard = (props) => {
       return(
          <div>
-            <Header />
+				<Header view="dashboard" history={props.history}/>
          </div>
       )
-   }
+
 }
 
-// function mapStateToProps(state) {
-//    return {
-//       user: state.user
-//    }
-// }
-
-// export default connect(mapStateToProps, {getUser})(Dashboard);
+export default Dashboard;

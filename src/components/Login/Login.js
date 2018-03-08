@@ -31,7 +31,7 @@ export default class Login extends React.Component {
             })
          }
          
-         this.props.history.push(res.headers.location) //REDIRECT IF LOGGED IN
+         this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
 
       })  
    }
