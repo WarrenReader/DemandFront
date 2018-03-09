@@ -6,6 +6,7 @@ import './App.css';
 
 //COMPONENTS
 import routes from './routes/routes.js';
+import Header from '../src/components/Header/Header.js';
 
 //COMPONENT
 export default class App extends React.Component {
@@ -13,6 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header />
         {routes}
       </div>
     );

@@ -10,6 +10,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "history": "^4.7.2",
     "massive": "^4.7.0",
     "material-ui": "^0.20.0",
     "passport": "^0.4.0",

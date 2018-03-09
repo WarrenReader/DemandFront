@@ -74,7 +74,6 @@ passport.deserializeUser((id, done) => {
 
 	app.get('db').retrieve_user_by_id([id]).then(result => {
 		const user = result[0];
-		console.log(user);
 		return done(null, user);
 	})
 });
@@ -96,7 +95,7 @@ app.post('/api/login', passport.authenticate('local'), (req, res, next) => {
 
 app.get('/logout', (req,res) => {
 	req.logout();
-	res.redirect(200, '/');
+	res.redirect('http://localhost:3000/#/');
 })
 
 

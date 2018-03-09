@@ -1,15 +1,17 @@
 //MODULES
 import React from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 
 //CSS AND ASSETS
 import './Login.css';
 import logo from './logo.png';
+import {hideHeader, showHeader, getUser} from '../../redux/reducer.js';
 
 
 //COMPONENT
-export default class Login extends React.Component {
+class Login extends React.Component {
    constructor() {
       super()
       this.state = {
@@ -18,6 +20,16 @@ export default class Login extends React.Component {
          status: ''
       }
       this.handleLogin = this.handleLogin.bind(this);
+   }
+
+   componentWillMount() {
+      this.props.hideHeader();
+   }
+
+   componentWillUnmount() {
+      this.props.showHeader();
+      this.props.getUser();
+
    }
 
 
@@ -81,3 +93,13 @@ export default class Login extends React.Component {
       )
    }
 }
+
+
+function mapStateToProps(state) {
+   return {
+      headerVisibility: state.headerVisibility
+   }
+}
+
+
+export default connect(mapStateToProps, {hideHeader, showHeader, getUser})(Login)
