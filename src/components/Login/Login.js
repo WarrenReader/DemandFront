@@ -2,9 +2,11 @@
 import React from 'react';
 import axios from 'axios';
 
+
 //CSS AND ASSETS
 import './Login.css';
 import logo from './logo.png';
+
 
 //COMPONENT
 export default class Login extends React.Component {
@@ -15,9 +17,9 @@ export default class Login extends React.Component {
          password: '',
          status: ''
       }
-
       this.handleLogin = this.handleLogin.bind(this);
    }
+
 
    handleLogin(e) {
       e.preventDefault();
@@ -30,11 +32,10 @@ export default class Login extends React.Component {
                status: res.data
             })
          }
-         
          this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
-
       })  
    }
+
 
    render() {
 
@@ -75,9 +76,7 @@ export default class Login extends React.Component {
                   </button>
                   
                </form>
-
             </div>
-
          </div>
       )
    }

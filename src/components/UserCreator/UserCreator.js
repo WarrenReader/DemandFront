@@ -9,6 +9,7 @@ export default class UserCreator extends React.Component {
       this.state = {
          username: '',
          password: '',
+         agencyEmployeeId: '',
          status: ''
       }
 
@@ -17,10 +18,10 @@ export default class UserCreator extends React.Component {
 
    handleFormSubmit(e) {
       e.preventDefault();
-      let {username, password} = this.state;
+      let {username, password, agencyEmployeeId} = this.state;
       username = username.toLowerCase();
 
-      axios.post('/api/create-user', {username, password}).then(res => {
+      axios.post('/api/create-user', {username, password, agencyEmployeeId}).then(res => {
          if(res.data.status) {
             console.log(res);
             this.setState({
@@ -37,11 +38,11 @@ export default class UserCreator extends React.Component {
 
    render() {
 
-      let {username, password, status} = this.state;
+      let {username, password, agencyEmployeeId, status} = this.state;
 
       return(
          <div className="create-user-parent-container">
-            <div className="login-child-container">
+            <div className="create-user-child-container">
 
                <img src={Logo} alt="Logo" className="create-user-logo"/>
 
@@ -64,6 +65,16 @@ export default class UserCreator extends React.Component {
                         className="login-field raleway"
                         value={password}
                         onChange={e => this.setState({password: e.target.value})}
+                     />
+                  </div>
+
+                  <div className="login-field-container raleway">
+                     <span className="login-field-title raleway">ID</span>
+                     <input
+                        type="password"
+                        className="login-field raleway"
+                        value={agencyEmployeeId}
+                        onChange={e => this.setState({agencyEmployeeId: e.target.value})}
                      />
                   </div>
 

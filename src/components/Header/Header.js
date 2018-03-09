@@ -22,11 +22,13 @@ class Header extends React.Component {
       this.props.getUser();
    }
 
+
    handleLogout() {
       axios.get('/logout').then(res => {
          this.props.history.push(res.headers.location) //REDIRECT IF LOGGED IN  
       })
    }
+
 
    render() {
 

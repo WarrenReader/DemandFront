@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+//MODULES
+import React from 'react';
+
+//CSS, ASSETS
 import './App.css';
+
+//COMPONENTS
 import routes from './routes/routes.js';
 
-export default class App extends Component {
+//COMPONENT
+export default class App extends React.Component {
+
   render() {
     return (
       <div className="App">

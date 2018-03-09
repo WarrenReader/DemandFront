@@ -11,7 +11,10 @@ import Header from '../Header/Header.js';
 export default class Clients extends React.Component {
    render() {
       return(
-         <Header view="clients"/>
+         <div>
+            <Header view="clients"/>
+            Clients
+         </div>
       )
    }
 }

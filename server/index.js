@@ -74,6 +74,7 @@ passport.deserializeUser((id, done) => {
 
 	app.get('db').retrieve_user_by_id([id]).then(result => {
 		const user = result[0];
+		console.log(user);
 		return done(null, user);
 	})
 });

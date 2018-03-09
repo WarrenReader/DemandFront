@@ -1,5 +1,5 @@
 INSERT INTO users
-(username, password)
+(username, password, agency_employee_id)
 VALUES
-($1, $2)
+($1, $2, $3)
 RETURNING *;

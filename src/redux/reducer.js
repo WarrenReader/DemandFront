@@ -2,7 +2,8 @@ import axios from 'axios';
 
 //SET INITIAL STATE
 const initialState = {
-   user:{}
+   user:{},
+   test: 'test'
 }
 
 

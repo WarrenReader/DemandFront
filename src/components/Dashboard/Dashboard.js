@@ -4,16 +4,17 @@ import React from 'react';
 //CSS, ASSETS
 import './Dashboard.css';
 
-//IMPORT COMPONENTS
+//COMPONENTS
 import Header from '../Header/Header.js';
 
 //COMPONENT
 const Dashboard = (props) => {
-      return(
-         <div>
-				<Header view="dashboard" history={props.history}/>
-         </div>
-      )
+	return(
+		<div>
+			<Header view="dashboard" history={props.history}/>
+			Dashboard
+		</div>
+	)
 
 }
 

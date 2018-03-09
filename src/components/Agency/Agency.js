@@ -11,7 +11,10 @@ import Header from '../Header/Header.js';
 export default class Agency extends React.Component {
    render() {
       return(
-         <Header view='agency'/>
+         <div>
+            <Header view='agency'/>
+            Agency
+         </div>
       )
    }
 }
