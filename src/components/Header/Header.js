@@ -27,7 +27,7 @@ class Header extends React.Component {
 		
 		return (
 			
-			<div>
+			<div className="header-container">
 
 				{ headerVisibility &&
 					<div>
@@ -55,7 +55,7 @@ class Header extends React.Component {
 									</Link>
 								</li>
 								<li className="header-link-mobile"><Link to='/settings'>Settings</Link></li>
-								<li className="header-link-mobile"><a onClick={this.handleLogout}>Logout</a></li>
+								<li className="header-link-mobile"><a href={process.env.REACT_APP_LOGOUT}>Logout</a></li>
 							</ul>
 
 							<div className="header-profile-container">
