@@ -69,12 +69,76 @@ export default class Products extends React.Component {
 							<div className="products-container-bottom">
 								<div className="products-container-bottom-left">
 									<span>Clients Subscribed:</span>
-									<div className="product-client-list"></div>
+									<div className="product-client-list">
+
+										<div className="unique-client-row">
+											<span>Client:</span>
+											<span>Product Added:</span>
+											<span>Price:</span>
+										</div>
+
+										<div className="unique-client-row">
+											<span>Client:</span>
+											<span>Product Added:</span>
+											<span>Price:</span>
+										</div>
+
+										<div className="unique-client-row">
+											<span>Client:</span>
+											<span>Product Added:</span>
+											<span>Price:</span>
+										</div>
+
+										<div className="unique-client-row">
+											<span>Client:</span>
+											<span>Product Added:</span>
+											<span>Price:</span>
+										</div>
+
+										<div className="unique-client-row">
+											<span>Client:</span>
+											<span>Product Added:</span>
+											<span>Price:</span>
+										</div>
+
+									</div>
 								</div>
 
 								<div className="products-container-bottom-right">
-									<span>Notes:</span>
-									<div className="product-notes"></div>
+									<span>Product Notes:</span>
+									<div className="product-notes">
+
+										<div className="unique-note">
+											<span>Date:</span>
+											<span>Creator:</span>
+											<span>Note:</span>
+										</div>
+
+										<div className="unique-note">
+											<span>Date:</span>
+											<span>Creator:</span>
+											<span>Note:</span>
+										</div>
+
+										<div className="unique-note">
+											<span>Date:</span>
+											<span>Creator:</span>
+											<span>Note:</span>
+										</div>
+										
+										<div className="unique-note">
+											<span>Date:</span>
+											<span>Creator:</span>
+											<span>Note:</span>
+										</div>
+
+										<div className="unique-note">
+											<span>Date:</span>
+											<span>Creator:</span>
+											<span>Note:</span>
+										</div>
+
+									</div>
 								</div>
 
 							</div>

@@ -10,7 +10,7 @@
 .products-container-left {
    display: flex;
    flex-direction: column;
-   margin-bottom: 25px;
+   margin-bottom: 30px;
 }
 
 .products-left {
@@ -28,8 +28,7 @@
 .products-right {
    display: flex;
    flex-direction: column;
-   height: 600px;
-   padding: 25px;
+   padding: 20px;
    background:rgb(243, 243, 243);
    border-radius: 5px;
 }
@@ -39,7 +38,7 @@
 .product-details-top {
    display: flex;
    flex-direction: column;
-   margin-bottom: 40px;
+   margin-bottom: 20px;
 }
 
 .product-details-top-left {
@@ -82,14 +81,52 @@
 
 .product-client-list {
    flex-grow: 1;
+   max-height: 350px;
    background:rgb(221, 221, 221);
+   border-radius: 5px;
+   padding: 10px;
+   overflow-y: scroll;
+}
+
+.unique-client-row {
+   font-size: 0.95em;
+   background: rgb(201, 201, 201);
+   padding: 10px;
+   margin-top: 10px;
    border-radius: 5px;
 }
 
+.unique-client-row span {
+   margin: 5px 0 0 0;
+}
+
+.unique-client-row:first-child {
+   margin-top: 0px;
+}
+
 .product-notes {
+   max-height: 350px;
    flex-grow: 1;
    background:rgb(221, 221, 221);
+   padding: 10px;
    border-radius: 5px;
+   overflow-y: scroll;
+}
+
+.unique-note{
+   font-size: 0.95em;
+   background: rgb(201, 201, 201);
+   padding: 10px;
+   margin-top: 10px;
+   border-radius: 5px; 
+}
+
+.unique-note:first-child {
+   margin-top: 0px;
+}
+
+.unique-note span {
+   margin: 5px 0 0 0;
 }
 
 /* PRODUCT LIST */
@@ -135,7 +172,7 @@
    .products-container-right {
       flex: 2;
       min-height: 100%;
-      margin-left: 50px;
+      margin-left: 40px;
    }
    
    .products-right {
@@ -147,6 +184,29 @@
    /* PRODUCT DETAILS */
    .product-details-top {
       flex-direction: row;
+   }
+
+   .products-container-bottom {
+      flex-direction: row;
+      flex-grow: 1;
+   }
+
+   .products-container-bottom-left {
+      /* max-width: 276px; */
+      margin-bottom: 0px;
+   }
+
+   .product-client-list {
+      max-height: 100%;
+   }
+
+   .products-container-bottom-right {
+      /* max-width: 276px; */
+      margin-left: 20px;
+   }
+
+   .product-notes {
+      max-height: 100%;
    }
 
 }
