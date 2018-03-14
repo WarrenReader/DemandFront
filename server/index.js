@@ -109,6 +109,8 @@ app.get('/auth/me', (req, res) => {
 
 app.post('/api/create-user', controllers.createUser)
 
+app.get('/api/get-users', controllers.getUsers)
+
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));
