@@ -111,6 +111,8 @@ app.post('/api/create-user', controllers.createUser)
 
 app.get('/api/get-users', controllers.getUsers)
 
+app.put('/api/update-user', controllers.updateUser)
+
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));

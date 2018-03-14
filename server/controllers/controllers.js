@@ -29,6 +29,19 @@ module.exports = {
       db.retrieve_agency_users([agencyId]).then(result => {
          res.status(200).send(result);
       })
+   },
+
+   updateUser: (req, res) => {
+      const {user} = req.body;
+      const db = req.app.get('db');
+
+      db.update_agency_employee([
+         user.first_name
+         , user.last_name
+         , user.email
+         , user.phone
+         , user.position
+         , user.agency_employee_id]).then()
    }
    
 }
