@@ -10,6 +10,7 @@ import Clients from '../components/Clients/Clients.js';
 import Agency from '../components/Agency/Agency.js';
 import Products from '../components/Products/Products.js';
 import Users from '../components/Users/Users.js';
+import Settings from '../components/Settings/Settings.js';
 
 export default (
    <Switch>
@@ -20,5 +21,6 @@ export default (
       <Route exact path='/agency' component={Agency} />
       <Route path='/agency/products' component={Products} />
       <Route path='/agency/users' component={Users} />
+      <Route path='/settings' component={Settings} />
    </Switch>
 )

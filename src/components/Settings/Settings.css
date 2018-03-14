@@ -1,0 +1,48 @@
+.settings-parent-container {
+   display: flex;
+   flex-direction:column;
+   flex: 1;
+   padding: 35px;
+   background: white;
+}
+
+.settings-child-container {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   border-radius: 5px;
+   padding: 15px;
+   background:rgb(240, 240, 240);
+}
+
+.settings-parent-container span {
+   margin-bottom: 5px;
+}
+
+.settings-parent-container input {
+   font-size: 1em;
+   padding: 6px;
+   margin-bottom: 10px;
+   border: none;
+}
+
+.settings-parent-container input[disabled] {
+   background: rgb(220, 220, 220);
+}
+
+.settings-parent-container button {
+   font-size: 0.8em;
+   width: 250px;
+   height: 30px;
+   margin: 0 auto;
+   border: none;
+   cursor: pointer;
+}
+
+.settings-edit-button {
+   background: rgba(185, 185, 185, 0.8);
+}
+
+.settings-save-button {
+   background: rgba(82, 241, 76, 0.8);
+}

@@ -66,7 +66,7 @@ class Header extends React.Component {
 										<i className="arrow down"></i>
 									</label>
 									<ul className="profile-menu raleway">
-										<li><Link to='/#'>Settings</Link></li>
+										<li><Link to='/settings'>Settings</Link></li>
 										<li><a href={process.env.REACT_APP_LOGOUT}>Logout</a></li>
 									</ul>
 								</div>
