@@ -113,6 +113,10 @@ app.get('/api/get-users', controllers.getUsers)
 
 app.put('/api/update-user', controllers.updateUser)
 
+app.get('/api/tasks', controllers.getTasks)
+
+app.put('/api/update-task', controllers.updateTask)
+
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));

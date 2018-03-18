@@ -1,5 +1,6 @@
 SELECT
 users.id as user_id
+, agency_employee.agency_id as agency_id
 , agency_employee.id as agency_employee_id
 , username
 , first_name 

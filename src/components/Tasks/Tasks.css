@@ -1,0 +1,110 @@
+.tasks-parent-container {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   padding: 35px;
+   background: white;
+}
+
+.tasks-child-left {
+   display: flex;
+   flex-direction: column;
+   height: 400px;
+   margin-bottom: 25px;
+}
+
+.tasks-child-left-inner {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   background: rgb(240, 240, 240);
+   border-radius: 5px;
+   padding: 12px;
+   overflow-y: scroll;
+}
+
+.tasks-child-right1 {
+   display: flex;
+   flex-direction: column;
+   height: 375px;
+   margin-bottom: 25px;
+}
+
+.tasks-child-right-inner {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   background: rgb(240, 240, 240);
+   border-radius: 5px;
+   padding: 20px;
+}
+
+
+/* EXISTING TASKS */
+.tasks-existing-task {
+   background: rgb(220, 220, 220);
+   padding: 8px;
+   margin-bottom: 12px;
+   border-radius: 3px;
+}
+
+.tasks-existing-task span {
+   display: block;
+   font-size: 0.95em;
+   padding: 2px 5px 2px 0;
+}
+
+.load-existing-task {
+
+}
+
+/* CREATE/EDIT TASK */
+.tasks-child-right-inner span{
+   margin-bottom: 4px;
+}
+
+.tasks-child-right-inner input{
+   font-size: 0.9em;
+   margin-bottom: 15px;
+   padding: 5px;
+   border: none;
+   border-radius: 3px;
+}
+
+.tasks-child-right-inner input[disabled] {
+   background: rgb(220, 220, 220);
+}
+
+.tasks-child-right-inner textarea{
+   border: none;
+   border-radius: 3px;
+   font-size: 0.9em;
+   margin-bottom: 15px;
+   padding: 5px;
+}
+
+.tasks-child-right-inner textarea[disabled] {
+   background: rgb(220, 220, 220);
+}
+
+.tasks-child-right-inner button {
+   font-size: 0.9em;
+   width: 250px;
+   height: 30px;
+   margin: 10px auto 0 auto;
+   border: none;
+   border-radius: 2px;
+   cursor: pointer;
+}
+
+.settings-create-button {
+   background: rgba(82, 241, 76, 0.8);
+}
+
+.settings-edit-button {
+   background: rgba(185, 185, 185, 0.8);
+}
+
+.settings-save-button {
+   background: rgba(82, 241, 76, 0.8);
+}

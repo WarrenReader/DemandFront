@@ -42,6 +42,31 @@ module.exports = {
          , user.phone
          , user.position
          , user.agency_employee_id]).then()
+   },
+
+   getTasks: (req, res) => {
+      const {agencyId} = req.query;
+      const db = req.app.get('db');
+
+      db.retrieve_tasks([agencyId]).then(result =>
+            res.status(200).send(result)
+      )
+
+   },
+
+   updateTask: (req, res) => {
+      const {name
+         , description
+         , estimated_cost
+         , task_id
+         , last_update
+         , last_update_by_agency_employee_id} = req.body
+      const db = req.app.get('db');
+      
+      db.update_task([name, description, estimated_cost, last_update, last_update_by_agency_employee_id, task_id]).then(result =>
+         res.status(200).send(result)
+      )
+
    }
    
 }

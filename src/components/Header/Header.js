@@ -100,7 +100,7 @@ class Header extends React.Component {
 								<li>AGENCY</li>
 								<li><Link to='/'>Metrics</Link></li>
 								<li><Link to='/agency/products'>Products</Link></li>
-								<li><Link to='/'>Tasks</Link></li>
+								<li><Link to='/agency/tasks'>Tasks</Link></li>
 								<li><Link to='/'>Roadmaps</Link></li>
 								<li><Link to='/agency/users'>Users</Link></li>
 							</ul>}

@@ -50,7 +50,7 @@ class Users extends React.Component {
       let {username, password, firstName, lastName, email, phone, position} = this.state;
       const {existing_users} = this.state;
 
-      const existing_users_content = existing_users.map((e, i) => 
+      const existing_users_content = existing_users.map(e => 
          <div className="existing-user-row" key={e.username}>
             <span><span>Name:</span> {`${e.first_name} ${e.last_name}`}</span>
             <span><span>Username:</span> {e.username}</span>
