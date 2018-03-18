@@ -117,6 +117,8 @@ app.get('/api/tasks', controllers.getTasks)
 
 app.put('/api/update-task', controllers.updateTask)
 
+app.post('/api/create-task', controllers.createTask)
+
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));

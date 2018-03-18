@@ -54,11 +54,8 @@
    padding: 2px 5px 2px 0;
 }
 
-.load-existing-task {
 
-}
-
-/* CREATE/EDIT TASK */
+/* EDIT TASK */
 .tasks-child-right-inner span{
    margin-bottom: 4px;
 }
@@ -107,4 +104,16 @@
 
 .settings-save-button {
    background: rgba(82, 241, 76, 0.8);
+}
+
+.settings-create-button {
+   background: rgba(82, 241, 76, 0.8);
+}
+
+/*CREATE TASK*/
+.tasks-child-right2 {
+   display: flex;
+   flex-direction: column;
+   height: 375px;
+   margin-bottom: 25px;
 }

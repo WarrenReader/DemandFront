@@ -67,6 +67,29 @@ module.exports = {
          res.status(200).send(result)
       )
 
+   },
+
+   createTask: (req, res) => {
+		const {name
+		, description
+		, estimated_cost
+		, date_created
+		, agency_employee_id
+		, agency_id
+		, last_update
+		, last_update_by_agency_employee_id} = req.body;
+
+		const db = req.app.get('db');
+
+		db.create_new_task([name
+			, description
+			, estimated_cost
+			, date_created
+			, agency_employee_id
+			, agency_id
+			, last_update
+			, last_update_by_agency_employee_id]).then(result => res.status(200).send(result));
+
    }
    
 }
