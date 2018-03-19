@@ -1,14 +1,16 @@
 .tasks-parent-container {
    display: flex;
    flex-direction: column;
-   flex: 1;
-   padding: 35px;
+   align-items: center;
+   padding: 25px 35px;
    background: white;
 }
 
 .tasks-child-left {
    display: flex;
    flex-direction: column;
+   width: 100%;
+   max-width: 600px;
    height: 400px;
    margin-bottom: 25px;
 }
@@ -23,9 +25,18 @@
    overflow-y: scroll;
 }
 
+.tasks-child-right{
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+}
+
 .tasks-child-right1 {
    display: flex;
    flex-direction: column;
+   width: 100%;
+   max-width: 450px;
    height: 375px;
    margin-bottom: 25px;
 }
@@ -46,12 +57,25 @@
    padding: 8px;
    margin-bottom: 12px;
    border-radius: 3px;
+   position: relative;
+}
+
+.tasks-existing-task:last-of-type {
+   margin-bottom: 0px;
 }
 
 .tasks-existing-task span {
    display: block;
    font-size: 0.95em;
    padding: 2px 5px 2px 0;
+}
+
+.tasks-existing-task a {
+   position: absolute;
+   top: 8px;
+   right: 8px;
+   font-size: 0.9em;
+   text-decoration: underline;
 }
 
 
@@ -94,6 +118,19 @@
    cursor: pointer;
 }
 
+.tasks-child-right-inner div{
+   display: flex;
+   justify-content: center;
+}
+
+.tasks-child-right-inner div button {
+   width: 40%;
+
+}
+
+
+
+
 .settings-create-button {
    background: rgba(82, 241, 76, 0.8);
 }
@@ -114,6 +151,32 @@
 .tasks-child-right2 {
    display: flex;
    flex-direction: column;
+   width: 100%;
+   max-width: 450px;
    height: 375px;
-   margin-bottom: 25px;
+}
+
+@media(min-width:1024px) {
+   .tasks-parent-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      flex: 1;
+   }
+
+   .tasks-child-left {
+      width: auto;
+      height: auto;
+      max-height: 763px;
+      flex: 1;
+      margin-bottom: 0px;
+   }
+
+   .tasks-child-right {
+      width: auto;
+      height: auto;
+      flex: 1;
+      margin-left: 30px;
+   }
+
 }

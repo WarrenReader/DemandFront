@@ -37,6 +37,7 @@ class Tasks extends React.Component {
       this.handleLoadEditTask = this.handleLoadEditTask.bind(this);
       this.handleEditButton = this.handleEditButton.bind(this);
 		this.handleSaveButton = this.handleSaveButton.bind(this);
+		this.handleCancelButton = this.handleCancelButton.bind(this);
 		this.handleCreateTask = this.handleCreateTask.bind(this);
    }
 
@@ -84,14 +85,17 @@ class Tasks extends React.Component {
 
 
    handleEditButton() {
-      //CHANGE edit ON STATE TO BE true
-      this.setState((prevState) => {
-         return {edit: !prevState.edit}
-      })
 
-      //CHANGE EDIT TASK FIELDS TO BE EDITABLE
-      let inputFields = Array.from(document.getElementsByClassName('edit-task'));
-      inputFields.forEach(e => e.removeAttribute("disabled"));
+		if(this.state.editTask.name !== ''){
+			//CHANGE edit ON STATE TO BE true
+			this.setState((prevState) => {
+				return {edit: !prevState.edit}
+			})
+
+			//CHANGE EDIT TASK FIELDS TO BE EDITABLE
+			let inputFields = Array.from(document.getElementsByClassName('edit-task'));
+			inputFields.forEach(e => e.removeAttribute("disabled"));
+		}
    }
 
 
@@ -109,6 +113,25 @@ class Tasks extends React.Component {
    }
 
 	
+	handleCancelButton() {
+		//CHANGE edit ON STATE TO BE false
+		this.setState((prevState) => {
+			return {edit: !prevState.edit}
+		})
+
+		//CLEAR EDIT TASK FIELDS
+		const editTask = Object.assign({}, this.state.editTask)
+		editTask.name = '';
+		editTask.description = '';
+		editTask.estimated_cost = '';
+		this.setState({editTask});
+
+		//CHANGE EDIT TASK FIELDS TO BE UNEDITABLE
+		let inputFields = Array.from(document.getElementsByClassName('edit-task'));
+		inputFields.forEach(e => e.setAttribute("disabled", "true"));
+	}
+
+
 	handleCreateTask() {
 		let {createTask} = this.state;
 		axios.post('/api/create-task', createTask).then(res => console.log(res))
@@ -137,113 +160,117 @@ class Tasks extends React.Component {
 					</div>
 				</div>
 
-				<div className="tasks-child-right1">
-					<h1>Edit Task</h1>
-					<div className="tasks-child-right-inner">
+				<div className="tasks-child-right">
+					<div className="tasks-child-right1">
+						<h1>Edit Task</h1>
+						<div className="tasks-child-right-inner">
 
+							<span>Task Name</span>
+							<input 
+								type="text"
+								className="edit-task"
+								placeholder="You Must Select A Task To Edit It"
+								value={editTask.name}
+								onChange={e => {
+									let editTask = Object.assign({}, this.state.editTask)
+									editTask.name = e.target.value;
+									this.setState({editTask});
+									}}
+								disabled />
+
+							<span>Description</span>
+							<textarea 
+								rows='4'
+								className="edit-task"
+								value={editTask.description}
+								onChange={e => {
+									let editTask = Object.assign({}, this.state.editTask)
+									editTask.description = e.target.value;
+									this.setState({editTask});
+									}}
+								disabled />
+
+							<span>Estimated Cost</span>
+							<input 
+								type="text"
+								className="edit-task"
+								value={editTask.estimated_cost}
+								onChange={e => {
+									let editTask = Object.assign({}, this.state.editTask)
+									editTask.estimated_cost = e.target.value;
+									this.setState({editTask});
+									}}
+								disabled />
+
+							{edit === false ? 
+								<button
+									className="settings-edit-button"
+									onClick={this.handleEditButton}>
+									Edit
+								</button>
+								:
+								<div>
+								<button
+									onClick={this.handleCancelButton}>
+									Cancel
+								</button>
+								<button 
+									className="settings-save-button"
+									onClick={this.handleSaveButton}>
+									Save
+								</button>
+								</div>
+							}
+
+
+		
+
+							</div>
+					</div>
+						
+					<div className="tasks-child-right2">
+						<h1>Create Task</h1>
+						<div className="tasks-child-right-inner">
+							
 						<span>Task Name</span>
 						<input 
 							type="text"
-							className="edit-task"
-							placeholder="You Must Select A Task To Edit It"
-							value={editTask.name}
+							value={createTask.name}
 							onChange={e => {
-								let editTask = Object.assign({}, this.state.editTask)
-								editTask.name = e.target.value;
-								this.setState({editTask});
-								}}
-							disabled />
+								let createTask = Object.assign({}, this.state.createTask)
+								createTask.name = e.target.value;
+								this.setState({createTask})
+							}} />
 
 						<span>Description</span>
 						<textarea 
 							rows='4'
-							className="edit-task"
-							value={editTask.description}
+							value={createTask.description}
 							onChange={e => {
-								let editTask = Object.assign({}, this.state.editTask)
-								editTask.description = e.target.value;
-								this.setState({editTask});
-								}}
-							disabled />
+								let createTask = Object.assign({}, this.state.createTask)
+								createTask.description = e.target.value;
+								this.setState({createTask})
+							}} />
 
 						<span>Estimated Cost</span>
 						<input 
 							type="text"
-							className="edit-task"
-							value={editTask.estimated_cost}
+							value={createTask.estimated_cost}
 							onChange={e => {
-								let editTask = Object.assign({}, this.state.editTask)
-								editTask.estimated_cost = e.target.value;
-								this.setState({editTask});
-								}}
-							disabled />
+								let createTask = Object.assign({}, this.state.createTask)
+								createTask.estimated_cost = e.target.value;
+								this.setState({createTask})
+							}} />
 
-						{edit === false ? 
-							<button
-								className="settings-edit-button"
-								onClick={this.handleEditButton}>
-								Edit
-							</button>
-							:
 							<button 
-								className="settings-save-button"
-								onClick={this.handleSaveButton}>
-								Save
+								className="settings-create-button"
+								onClick={this.handleCreateTask}>
+								Create Task
 							</button>
-						}
 
-
-	
-
-                   </div>
-				</div>
-					
-				<div className="tasks-child-right2">
-					<h1>Create Task</h1>
-					<div className="tasks-child-right-inner">
-						
-					<span>Task Name</span>
-					<input 
-						type="text"
-						className="edit-task"
-						value={createTask.name}
-						onChange={e => {
-							let createTask = Object.assign({}, this.state.createTask)
-							createTask.name = e.target.value;
-							this.setState({createTask})
-						}} />
-
-					<span>Description</span>
-					<textarea 
-						rows='4'
-						className="edit-task"
-						value={createTask.description}
-						onChange={e => {
-							let createTask = Object.assign({}, this.state.createTask)
-							createTask.description = e.target.value;
-							this.setState({createTask})
-						}} />
-
-					<span>Estimated Cost</span>
-					<input 
-						type="text"
-						className="edit-task"
-						value={createTask.estimated_cost}
-						onChange={e => {
-							let createTask = Object.assign({}, this.state.createTask)
-							createTask.estimated_cost = e.target.value;
-							this.setState({createTask})
-						}} />
-
-						<button 
-							className="settings-create-button"
-							onClick={this.handleCreateTask}>
-							Create Task
-						</button>
-
+						</div>
 					</div>
 				</div>
-
 
 			</div>
 			
