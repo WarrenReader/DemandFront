@@ -101,10 +101,27 @@ module.exports = {
    },
 
    updateProduct: (req, res) => {
-         const {name, price, product_id} = req.body;
+      const {name, price, product_id} = req.body;
       const db = req.app.get('db');
 
       db.update_product([name, price, product_id]).then(result => res.status(200).send(result));
-   }
-   
+   },
+
+   getRoadmaps: (req, res) => {
+      const {agencyId} = req.query;
+      const db = req.app.get('db');
+
+      db.retrieve_roadmaps([agencyId]).then(result => res.status(200).send(result))
+
+   }, 
+
+   getTask: (req, res) => {
+		const {taskId} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_task([taskId]).then(result => 
+			res.status(200).send(result)
+		)
+	}
+	
 }
