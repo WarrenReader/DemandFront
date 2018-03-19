@@ -90,6 +90,21 @@ module.exports = {
 			, last_update
 			, last_update_by_agency_employee_id]).then(result => res.status(200).send(result));
 
+   }, 
+
+   getProducts: (req, res) => {
+      const {agencyId} = req.query;
+      const db = req.app.get('db');
+
+      db.retrieve_products_by_user([agencyId]).then(result => res.status(200).send(result))
+
+   },
+
+   updateProduct: (req, res) => {
+         const {name, price, product_id} = req.body;
+      const db = req.app.get('db');
+
+      db.update_product([name, price, product_id]).then(result => res.status(200).send(result));
    }
    
 }

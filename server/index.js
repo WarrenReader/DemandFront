@@ -119,6 +119,10 @@ app.put('/api/update-task', controllers.updateTask)
 
 app.post('/api/create-task', controllers.createTask)
 
+app.get('/api/products', controllers.getProducts)
+
+app.put('/api/update-product', controllers.updateProduct);
+
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));
