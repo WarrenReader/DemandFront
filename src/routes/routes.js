@@ -13,18 +13,20 @@ import Users from '../components/Users/Users.js';
 import Settings from '../components/Settings/Settings.js';
 import Tasks from '../components/Tasks/Tasks.js';
 import Roadmaps from '../components/Roadmaps/Roadmaps.js';
+import Profile from '../components/Profile/Profile.js';
 
 export default (
    <Switch>
       <Route exact path='/' component={Login} />
       <Route path='/create-user' component={UserCreator} />
       <Route path='/dashboard' component={Dashboard} />
-      <Route path='/clients' component={Clients} />
+      <Route exact path='/clients' component={Clients} />
       <Route exact path='/agency' component={Agency} />
       <Route path='/agency/products' component={Products} />
       <Route path='/agency/users' component={Users} />
       <Route path='/settings' component={Settings} />
       <Route path='/agency/tasks' component={Tasks} />
       <Route path='/agency/roadmaps' component={Roadmaps} />
+      <Route path='/clients/profile' component={Profile} />
    </Switch>
 )

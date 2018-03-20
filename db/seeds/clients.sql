@@ -1,0 +1,13 @@
+CREATE TABLE clients
+(id SERIAL PRIMARY KEY,
+name VARCHAR(50) NOT NULL,
+street_address VARCHAR(100) NOT NULL,
+city VARCHAR(50) NOT NULL,
+state_providence VARCHAR(50) NOT NULL,
+zip INTEGER NOT NULL,
+country VARCHAR(50) NOT NULL,
+phone VARCHAR(20) NOT NULL,
+url VARCHAR(75) NOT NULL,
+sign_up_date DATE,
+agencies_id INTEGER NOT NULL REFERENCES agencies(id)
+)

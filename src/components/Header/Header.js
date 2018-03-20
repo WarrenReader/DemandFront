@@ -89,9 +89,8 @@ class Header extends React.Component {
 							&& 
 							<ul>
 								<li>CLIENTS</li>
-								<li><Link to='/'>Link1</Link></li>
-								<li><Link to='/'>Link2</Link></li>
-								<li><Link to='/'>Link3</Link></li>
+								<li><Link to='/clients'>Client List</Link></li>
+								<li><Link to='/clients/add-new-client'>Add New Client</Link></li>
 							</ul>}
 
 							{view === 'agency'

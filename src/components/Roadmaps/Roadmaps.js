@@ -54,10 +54,10 @@ class Roadmaps extends React.Component {
          
          axios.get(`/api/task/?taskId=${task_id}`).then(res => {
             const details = res.data[0];
-            
             const tasksArray = this.state.tasksArray;
             tasksArray.push(details);
             this.setState(tasksArray);
+            return '';
          })  
 
       })

@@ -1,14 +1,13 @@
-SELECT
+SELECT 
 users.id as user_id
-, agency_employee.agency_id as agency_id
-, agency_employee.id as agency_employee_id
 , username
+, agency_employees.id as agency_employees_id
+, agency_employees.agencies_id as agencies_id
 , first_name 
 , last_name
 , email
 , phone
 , position
-, primary_contact
 FROM users
-JOIN agency_employee ON users.agency_employee_id=agency_employee.id
+JOIN agency_employees ON users.agency_employees_id = agency_employees.id
 WHERE users.id = $1;

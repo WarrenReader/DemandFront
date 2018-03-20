@@ -1,0 +1,51 @@
+.clients-parent-container {
+   display: flex;
+   flex: 1;
+   padding: 35px;
+   background: white;
+}
+
+.clients-child-container {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+}
+
+.clients-child-inner {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   background: rgb(243, 243, 243);
+   border-radius: 5px;
+   padding: 10px;
+   overflow-y: scroll;
+}
+
+.unique-client {
+   position: relative;
+   font-size: 0.95em;
+   background: rgb(201, 201, 201);
+   padding: 10px;
+   margin-top: 10px;
+   border-radius: 5px;
+}
+
+.unique-client:first-child {
+   margin-top: 0px;
+}
+
+.unique-client span {
+   display: block;
+   margin-bottom: 5px;
+}
+
+.unique-client span:last-of-type {
+   margin-bottom: 0px;
+}
+
+.unique-client > a {
+   position: absolute;
+   top: 8px;
+   right: 10px;
+   text-decoration: underline;
+}

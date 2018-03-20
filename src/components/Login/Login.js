@@ -3,12 +3,10 @@ import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 
-
-//CSS AND ASSETS
+//CSS, ASSETS
 import './Login.css';
 import logo from './logo.png';
 import {hideHeader, showHeader, getUser} from '../../redux/reducer.js';
-
 
 //COMPONENT
 class Login extends React.Component {
@@ -29,7 +27,6 @@ class Login extends React.Component {
    componentWillUnmount() {
       this.props.showHeader();
       this.props.getUser();
-
    }
 
 
@@ -100,6 +97,5 @@ function mapStateToProps(state) {
       headerVisibility: state.headerVisibility
    }
 }
-
 
 export default connect(mapStateToProps, {hideHeader, showHeader, getUser})(Login)

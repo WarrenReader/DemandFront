@@ -1,4 +1,4 @@
-//REQUIRED PACKAGES
+//MODULES
 require('dotenv').config();
 const express = require('express')
    , bodyParser = require('body-parser')
@@ -9,30 +9,25 @@ const express = require('express')
 	, bcrypt = require('bcryptjs')
 	, cors = require('cors');
 
-
-//IMPORTING CONTROLLERS
-const controllers = require('./controllers/controllers.js');
-
+//IMPORT CONTROLLERS
+const controllers = require('./controllers.js');
 
 //SETUP APP
 const app = express();
 
-
-//IMPORTING VARAIBLES FROM .env
+//IMPORT VARAIBLES FROM .env
 const {SESSION_PORT
       , CONNECTION_STRING
 		, SESSION_SECRET} = process.env;
-
 
 //CONNECT DATABASE
 massive(CONNECTION_STRING).then(db => {
 	app.set('db', db)
 })
 
-
 //MIDDLEWARE
 app.use(bodyParser.json());
-app.use( session({		//ADDED TO REQ.SESSION
+app.use( session({		//SESSION DETAILS ADDED TO REQ.SESSION
    secret: SESSION_SECRET
    , resave: false
 	, saveUninitialized: false
@@ -79,18 +74,15 @@ passport.deserializeUser((id, done) => {
 });
 
 
-
-
 //ENDPOINTS
+//LOGIN & LOGOUT
 app.post('/api/login', passport.authenticate('local'), (req, res, next) => {
 	if(req.user === 'Unauthorized') {
 		res.status(200).send(req.user)
 	} else {
 		res.redirect(200, '/dashboard')
 	}
-
 	next();
-
 });
 
 app.get('/logout', (req,res) => {
@@ -98,7 +90,7 @@ app.get('/logout', (req,res) => {
 	res.redirect('http://localhost:3000/#/');
 })
 
-
+//CONFIRM USER SESSION
 app.get('/auth/me', (req, res) => {
    if (req.user) {
       res.status(200).send(req.user);
@@ -107,25 +99,18 @@ app.get('/auth/me', (req, res) => {
    }
 })
 
+//APPLICATION ENDPOINTS
 app.post('/api/create-user', controllers.createUser)
-
 app.get('/api/get-users', controllers.getUsers)
-
 app.put('/api/update-user', controllers.updateUser)
-
 app.get('/api/tasks', controllers.getTasks)
-
 app.put('/api/update-task', controllers.updateTask)
-
 app.post('/api/create-task', controllers.createTask)
-
 app.get('/api/products', controllers.getProducts)
-
 app.put('/api/update-product', controllers.updateProduct)
-
 app.get('/api/roadmaps', controllers.getRoadmaps)
-
 app.get('/api/task', controllers.getTask)
+app.get('/api/client-products', controllers.getClientProducts)
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));
