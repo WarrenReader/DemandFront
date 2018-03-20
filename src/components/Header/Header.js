@@ -3,11 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 
-
-//CSS AND ASSETS
+//CSS, ASSETS
 import './Header.css';
 import logo from './logo.png';
-
 
 //COMPONENT
 class Header extends React.Component {
@@ -17,7 +15,21 @@ class Header extends React.Component {
 			path: ''
 			, view: 'dashboard'
 		}
+		this.handleDesktopCollapse = this.handleDesktopCollapse.bind(this)
    }
+
+
+	handleDesktopCollapse() {
+		const checkbox = document.getElementById('profile-btn')
+		checkbox.checked = false;
+	}
+
+
+	handleMobileCollapse() {
+		const checkbox = document.getElementById('menu-btn')
+		checkbox.checked = false;
+	}
+
 
    render() {
 
@@ -28,7 +40,6 @@ class Header extends React.Component {
 		return (
 			
 			<div className="header-container">
-
 				{ headerVisibility &&
 					<div>
 						<header className="header">
@@ -36,26 +47,30 @@ class Header extends React.Component {
 							<input className="menu-btn" type="checkbox" id="menu-btn" />
 							<label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
 							<ul className="menu raleway">
-								<li>
+								<li onClick={this.handleMobileCollapse}>
 									<Link 
 										onClick={e => {this.setState({view: 'dashboard'})}} 
 										to='/dashboard'>Dashboard
 									</Link>
 								</li>
-								<li>
+								<li onClick={this.handleMobileCollapse}>
 									<Link 
 									onClick={e => {this.setState({view: 'clients'})}} 
 									to='/clients'>Clients
 									</Link>
 								</li>
-								<li>
+								<li onClick={this.handleMobileCollapse}>
 									<Link
 									onClick={e => {this.setState({view: 'agency'})}} 
 									to='/agency'>Agency
 									</Link>
 								</li>
-								<li className="header-link-mobile"><Link to='/settings'>Settings</Link></li>
-								<li className="header-link-mobile"><a href={process.env.REACT_APP_LOGOUT}>Logout</a></li>
+								<li className="header-link-mobile" onClick={this.handleMobileCollapse}>
+									<Link to='/settings'>Settings</Link>
+								</li>
+
+								<li className="header-link-mobile"
+									onClick={this.handleMobileCollapse}><a href={process.env.REACT_APP_LOGOUT}>Logout</a></li>
 							</ul>
 
 							<div className="header-profile-container">
@@ -66,8 +81,12 @@ class Header extends React.Component {
 										<i className="arrow down"></i>
 									</label>
 									<ul className="profile-menu raleway">
-										<li><Link to='/settings'>Settings</Link></li>
-										<li><a href={process.env.REACT_APP_LOGOUT}>Logout</a></li>
+										<li onClick={this.handleDesktopCollapse}>
+											<Link to='/settings'>Settings</Link>
+										</li>
+										<li onClick={this.handleDesktopCollapse}>
+											<a href={process.env.REACT_APP_LOGOUT}>Logout</a>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -111,13 +130,11 @@ class Header extends React.Component {
    }
 }
 
-
 function mapStateToProps(state) {
    return {
       user: state.user
       , headerVisibility: state.headerVisibility
    }
 }
-
 
 export default connect(mapStateToProps)(Header)
