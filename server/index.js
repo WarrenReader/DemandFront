@@ -103,6 +103,7 @@ app.get('/auth/me', (req, res) => {
 app.post('/api/create-user', controllers.createUser)
 app.get('/api/get-users', controllers.getUsers)
 app.put('/api/update-user', controllers.updateUser)
+app.put('/api/delete-user', controllers.deleteUser)
 app.get('/api/tasks', controllers.getTasks)
 app.put('/api/update-task', controllers.updateTask)
 app.post('/api/create-task', controllers.createTask)

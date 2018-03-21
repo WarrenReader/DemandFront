@@ -5,18 +5,22 @@ const bcrypt = require('bcryptjs');
 module.exports = {
 
 	createUser: (req, res) => {
-		const { username, password, firstName, lastName, email, phone, position, agency_id } = req.body;
+		const {first_name, last_name, email, phone, position, agencies_id, username, password} = req.body;
 		const db = req.app.get('db');
 
 		//ENCRYPT PASSWORD
 		const salt = bcrypt.genSaltSync(10);
 		const hash = bcrypt.hashSync(password, salt); //HASH IS THE HASHED PASSWORD
 
-		db.create_agency_employee([firstName, lastName, email, phone, position, agency_id]).then(result => {
+		//CREATE NEW AGENCY EMPLOYEE
+		db.create_agency_employee([first_name, last_name, email, phone, position, agencies_id]).then(result => {
 
-			//GET NEW AGENCY EMPLOYEE ID
-			const { id: agencyEmployeeId } = result[0];
-			db.create_new_user([username, hash, agencyEmployeeId]).then(result => console.log(result))
+			// GET NEW AGENCY EMPLOYEE ID
+			const { id: agency_employees_id } = result[0];
+
+			//CREATE NEW USER
+			db.create_new_user([username, hash, agency_employees_id])
+
 		})
 	},
 
@@ -30,17 +34,29 @@ module.exports = {
 	},
 
 	updateUser: (req, res) => {
-		const { user } = req.body;
+		const {user} = req.body;
 		const db = req.app.get('db');
 		
-		db.update_agency_employee([
-			user.first_name
+		db.update_user([
+			user.agency_employees_id
+			, user.username
+			, user.first_name
 			, user.last_name
 			, user.email
 			, user.phone
 			, user.position
-			, user.agency_employees_id]).then(result => res.status(200).send(result))
+			, ])
 	},
+
+
+	deleteUser: (req, res) => {
+
+		const {agency_employees_id} = req.body;
+		const db = req.app.get('db');
+		
+		db.delete_user([agency_employees_id])
+	},
+
 
 	getTasks: (req, res) => {
 		const { agencyId } = req.query;

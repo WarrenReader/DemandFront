@@ -4,7 +4,6 @@ import {Switch, Route} from 'react-router-dom';
 
 //COMPONENTS
 import Login from '../components/Login/Login.js';
-import UserCreator from '../components/UserCreator/UserCreator.js';
 import Dashboard from '../components/Dashboard/Dashboard.js';
 import Clients from '../components/Clients/Clients.js';
 import Agency from '../components/Agency/Agency.js';
@@ -18,7 +17,6 @@ import Profile from '../components/Profile/Profile.js';
 export default (
    <Switch>
       <Route exact path='/' component={Login} />
-      <Route path='/create-user' component={UserCreator} />
       <Route path='/dashboard' component={Dashboard} />
       <Route exact path='/clients' component={Clients} />
       <Route exact path='/agency' component={Agency} />

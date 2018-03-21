@@ -5,7 +5,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: raleway;
+  font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
 
@@ -17,4 +17,8 @@ h1 {
   font-size: 1.5em;
   margin-bottom: 8px;
   font-weight: 500;
+}
+
+input {
+  font-family: 'Open Sans', sans-serif;
 }
