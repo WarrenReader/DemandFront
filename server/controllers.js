@@ -107,15 +107,28 @@ module.exports = {
 		const { agencyId } = req.query;
 		const db = req.app.get('db');
 
-		db.retrieve_products_by_user([agencyId]).then(result => res.status(200).send(result))
-
+		db.retrieve_products_by_agency([agencyId]).then(result => res.status(200).send(result))
 	},
 
 	updateProduct: (req, res) => {
-		const { name, price, product_id } = req.body;
+		const { name, price, products_id } = req.body;
 		const db = req.app.get('db');
 
-		db.update_product([name, price, product_id]).then(result => res.status(200).send(result));
+		db.update_product([name, price, products_id]).then(result => res.sendStatus(200));
+	},
+
+	getProductNotes: (req, res) => {
+		const {products_id} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_product_notes([products_id]).then(result => res.status(200).send(result))
+	},
+
+	createNote: (req, res) => {
+		const {date, agency_employees_id, note, products_id} = req.body.newNote;
+		const db = req.app.get('db');
+
+		db.create_note([date, note, products_id, agency_employees_id])
 	},
 
 	getRoadmaps: (req, res) => {

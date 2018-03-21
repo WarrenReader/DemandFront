@@ -22,18 +22,21 @@ class Products extends React.Component {
 				, price: ''
 				, estimated_profit_margin: 'N/A'
 				, roadmap: 'N/A'
-				, product_id: ''
+				, products_id: ''
 			}
+			, productNotes: []
+			, editProductStatus: ''
 		}
 		this.handleEditProduct = this.handleEditProduct.bind(this);
 		this.handleEditButton = this.handleEditButton.bind(this);
 		this.handleSaveButton = this.handleSaveButton.bind(this);
 		this.handleCancelButton = this.handleCancelButton.bind(this);
+		this.handleNewNote = this.handleNewNote.bind(this);
 	}
 
 
 	componentWillMount() {
-		axios.get(`/api/products/?agencyId=${this.props.user.agency_id}`).then(res => 
+		axios.get(`/api/products/?agencyId=${this.props.user.agencies_id}`).then(res => 
 			this.setState({products: res.data})
 	)}
 
@@ -48,8 +51,13 @@ class Products extends React.Component {
 		product.first_name = selectedProduct.first_name;
 		product.last_name = selectedProduct.last_name;
 		product.price = selectedProduct.price;
-		product.product_id = selectedProduct.product_id;
+		product.products_id = selectedProduct.products_id;
 		this.setState({product});
+
+		//LOAD PRODUCT NOTES
+		axios.get(`/api/get-product-notes/?products_id=${this.state.products[index].products_id}`).then(result => {
+			this.setState({productNotes: result.data});
+		})
 	}
 
 
@@ -60,6 +68,9 @@ class Products extends React.Component {
 			this.setState((prevState) => {
 				return {edit: !prevState.edit}
 			})
+
+			//CHANGE editProductStatus ON STATE TO BE ''
+			this.setState({editProductStatus: ''})
 
 			//CHANGE EDIT TASK FIELDS TO BE EDITABLE
 			let inputFields = Array.from(document.getElementsByClassName('edit-field'));
@@ -78,7 +89,13 @@ class Products extends React.Component {
       let inputFields = Array.from(document.getElementsByClassName('edit-field'));
       inputFields.forEach(e => e.setAttribute("disabled", "true"));
 
-      axios.put('/api/update-product', this.state.product).then(result => console.log(result))
+      axios.put('/api/update-product', this.state.product).then(result => {
+			this.setState({editProductStatus: result.status});
+
+			//UPDATE TASK LIST
+			axios.get(`/api/products/?agencyId=${this.props.user.agencies_id}`).then(res => 
+				this.setState({products: res.data}))
+		})
    }
 
 
@@ -91,28 +108,64 @@ class Products extends React.Component {
 		//CHANGE EDIT TASK FIELDS TO BE UNEDITABLE
 		let inputFields = Array.from(document.getElementsByClassName('edit-field'));
 		inputFields.forEach(e => e.setAttribute("disabled", "true"));
+
+		const product = Object.assign({}, this.state.product)
+		product.name = '';
+		product.created_on = '';
+		product.first_name = '';
+		product.last_name = '';
+		product.price = '';
+		product.products_id = '';
+		this.setState({product});
+	}
+
+	handleNewNote() {
+		let note = prompt('New Note');
+
+		if(note !== null) {
+			const newNote = {
+				date: new Date(),
+				agency_employees_id: this.props.user.agency_employees_id,
+				note,
+				products_id: this.state.product.products_id
+			}
+					
+			axios.post('/api/create-note', {newNote}).then(
+				//RELOAD PRODUCT NOTES
+				//NOT WORKING CORRECTLY
+				axios.get(`/api/get-product-notes/?products_id=${this.state.product.products_id}`).then(result => {
+					this.setState({productNotes: result.data});
+				})
+			)
+		}
 	}
 
 
    render() {
-		const {edit, products, product} = this.state;
+		const {edit, products, product, productNotes, editProductStatus} = this.state;
 		const existingProducts = products.map((e, index) => 
 			<div key={e.name} className="unique-product">
-				<span>Name: {e.name}</span>
-				<span>Price: {e.price}</span>
-				<span>Subscribed: N/A</span>
+				<span>Name: <span>{e.name}</span></span>
+				<span>Price: <span>{e.price}</span></span>
+				<span>Subscribed: <span>N/A</span></span>
 				<a onClick={this.handleEditProduct.bind(this, index)}>View Details</a>
 			</div>
 		);
+
+		const notes = productNotes.map((e, index) => 
+			<div key={index} className="unique-note">
+				<span>Date: <span><Moment format="MM-DD-YYYY">{e.created_on}</Moment></span></span>
+				<span>Author: <span>{`${e.first_name} ${e.last_name}`}</span></span>
+				<span>Note: <span className="note">{e.note}</span></span>
+			</div>
+		);
 		
-		console.log('product', this.state.product)
-		console.log('products', this.state.products)
 
       return(
             <div className="products-parent-container">
 
                <div className="products-container-left">
-                  <h1>Products</h1>
+                  <h1>Existing Products</h1>
                   <div className="products-left">
                      
                      <div className="product-list">
@@ -122,12 +175,13 @@ class Products extends React.Component {
                </div>
 
                   <div className="products-container-right">
-                  <h1>Product Details</h1>
+						<h1>Product Details</h1>
+						{editProductStatus === 200 ? <div className="edit-product-status">Update Successful</div> : ''}
                   <div className="products-right">
 
 							<div className="product-details-top">
 								<div className="product-details-top-left">
-										<span>Product Name:</span>
+										<span>Product Name</span>
 										<input 
 											className="edit-field"
 											type='text' 
@@ -140,22 +194,19 @@ class Products extends React.Component {
 											}}
 											disabled />
 
-										<span>Date Created:</span>
+										<span>Date Created</span>
 										{product.created_on === '' ? <span className="static-span">N/A</span> :
 										<span className="static-span"><Moment format="YYYY-MM-DD">{product.created_on}</Moment></span>
 										}
 
-										
-
-										
-
-										<span>Created By:</span>
+										<span>Created By</span>
+										{product.first_name === '' ? <span className="static-span">N/A</span> : 
 										<span className="static-span">{`${product.first_name} ${product.last_name}`}</span>
-
+										}
 
 								</div>
 								<div className="product-details-top-right">
-										<span>Price:</span>
+										<span>Price</span>
 										<input 
 											className="edit-field"
 											type='text'
@@ -167,11 +218,11 @@ class Products extends React.Component {
 											}}
 											disabled />
 
-										<span>Estimated Profit Margin:</span>
+										<span>Estimated Profit Margin</span>
 										<span className="static-span">N/A</span>
 
 
-										<span>Roadmap:</span>
+										<span>Roadmap</span>
 										<span className="static-span">N/A</span>
 
 								</div>
@@ -183,7 +234,7 @@ class Products extends React.Component {
 									<button
 										className="settings-edit-button"
 										onClick={this.handleEditButton}>
-										Edit
+										Edit Product Details
 									</button>
 								</div>
 								:
@@ -203,7 +254,7 @@ class Products extends React.Component {
 
 							<div className="products-container-bottom">
 								<div className="products-container-bottom-left">
-									<span>Clients Subscribed:</span>
+									<span>Clients Subscribed</span>
 									<div className="product-client-list">
 
 										<div className="unique-client-row">
@@ -240,44 +291,19 @@ class Products extends React.Component {
 								</div>
 
 								<div className="products-container-bottom-right">
-									<span>Product Notes:</span>
+									<span>
+										Product Notes
+										{this.state.product.name !== '' ? <a className="add-note" onClick={this.handleNewNote}>
+											Add Note +
+										</a> : ''}
+									</span>
+									
 									<div className="product-notes">
-
-										<div className="unique-note">
-											<span>Date:</span>
-											<span>Creator:</span>
-											<span>Note:</span>
-										</div>
-
-										<div className="unique-note">
-											<span>Date:</span>
-											<span>Creator:</span>
-											<span>Note:</span>
-										</div>
-
-										<div className="unique-note">
-											<span>Date:</span>
-											<span>Creator:</span>
-											<span>Note:</span>
-										</div>
-										
-										<div className="unique-note">
-											<span>Date:</span>
-											<span>Creator:</span>
-											<span>Note:</span>
-										</div>
-
-										<div className="unique-note">
-											<span>Date:</span>
-											<span>Creator:</span>
-											<span>Note:</span>
-										</div>
-
+										{notes}
 									</div>
+
 								</div>
-
 							</div>
-
                   </div>
                   </div>
 

@@ -29,8 +29,8 @@ class Roadmaps extends React.Component {
    }
 
    componentWillMount() {
-      const {agency_id} = this.props.user;
-      axios.get(`/api/roadmaps/?agencyId=${agency_id}`).then(res => this.setState({roadmaps: res.data}))
+      const {agencies_id} = this.props.user;
+      axios.get(`/api/roadmaps/?agencyId=${agencies_id}`).then(res => this.setState({roadmaps: res.data}))
    }
 
    handleEditButton(index) {
@@ -59,7 +59,7 @@ class Roadmaps extends React.Component {
             this.setState(tasksArray);
             return '';
          })  
-
+            return '';
       })
    }
 
