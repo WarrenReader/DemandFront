@@ -74,6 +74,16 @@
    flex-direction: column;
    width: 100%;
    max-width: 450px;
+   position: relative
+}
+
+.create-new-user-parent-container > .create-user-status {
+   position: absolute;
+   position: absolute;
+   top: 40px;
+   right: 15px;
+   color: rgb(28, 180, 23);
+   animation: fade 0.75s linear;
 }
 
 .create-new-user-child-container {
@@ -122,10 +132,19 @@
 .users-edit-user {
    display: flex;
    flex-direction: column;
+   position: relative;
    width: 100%;
    max-width: 450px;
    max-height: 600px;
    margin-bottom: 30px;
+}
+
+.users-edit-user .edit-user-status {
+   position: absolute;
+   top: 40px;
+   right: 15px;
+   color: rgb(28, 180, 23);
+   animation: fade 0.75s linear;
 }
 
 .users-edit-user-child {

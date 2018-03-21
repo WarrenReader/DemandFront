@@ -16,22 +16,24 @@ class Tasks extends React.Component {
          , editTask: {
             name: ''
             , description: ''
-            , estimated_cost: ''
-            , task_id: ''
+            , cost: ''
+            , tasks_id: ''
             , last_update: ''
-            , last_update_by_agency_employee_id: ''
+            , last_update_by_agency_employees_id: ''
 			}
 			, createTask: {
 				name: ''
 				, description: ''
-				, estimated_cost: ''
+				, cost: ''
 				, date_created: ''
-				, agency_employee_id: ''
-				, agency_id: ''
+				, agency_employees_id: ''
+				, agencies_id: ''
 				, last_update: ''
-				, last_update_by_agency_employee_id: ''
+				, last_update_agency_employees_id: ''
 			}
-         , edit: false
+			, edit: false
+			, editTaskStatus: ''
+			, createTaskStatus: ''
       }
 
       this.handleLoadEditTask = this.handleLoadEditTask.bind(this);
@@ -44,8 +46,9 @@ class Tasks extends React.Component {
 
    componentWillMount() {
 		//RETREIVE TASKS FROM DATABASE
-      const {agency_id} = this.props.user;
-      axios.get(`/api/tasks?agencyId=${agency_id}`).then(result => {
+		const {agencies_id} = this.props.user;
+
+      axios.get(`/api/tasks?agency_id=${agencies_id}`).then(result => {
          this.setState({tasks: result.data})
 		})
 		
@@ -53,9 +56,9 @@ class Tasks extends React.Component {
 		const createTask = Object.assign({}, this.state.createTask);
 		createTask.date_created = new Date();
 		createTask.last_update = new Date();
-		createTask.agency_employee_id = this.props.user.agency_employee_id;
-		createTask.last_update_by_agency_employee_id = this.props.user.agency_employee_id;
-		createTask.agency_id = this.props.user.agency_id;
+		createTask.agency_employees_id = this.props.user.agency_employees_id;
+		createTask.last_update_agency_employees_id = this.props.user.agency_employees_id;
+		createTask.agencies_id = this.props.user.agencies_id;
 		this.setState({createTask})
    }
 
@@ -68,19 +71,18 @@ class Tasks extends React.Component {
       let loadTask = this.state.tasks[index]
       editTask.name = loadTask.name;
       editTask.description = loadTask.description;
-      editTask.estimated_cost = loadTask.estimated_cost;
-      editTask.task_id = loadTask.task_id;
+      editTask.cost = loadTask.cost;
+      editTask.tasks_id = loadTask.tasks_id;
 
       //ADD last_update TO editTask ON STATE
       const now = new Date();
       editTask.last_update = now;
 
       //ADD agency_employee_id TO editTask ON STATE
-      editTask.last_update_by_agency_employee_id = this.props.user.agency_employee_id;
+      editTask.last_update_by_agency_employees_id = this.props.user.agency_employees_id;
 
       //UPDATE STATE
       this.setState({editTask})
-
    }
 
 
@@ -91,6 +93,8 @@ class Tasks extends React.Component {
 			this.setState((prevState) => {
 				return {edit: !prevState.edit}
 			})
+
+			this.setState({editTaskStatus: ''})
 
 			//CHANGE EDIT TASK FIELDS TO BE EDITABLE
 			let inputFields = Array.from(document.getElementsByClassName('edit-task'));
@@ -109,7 +113,9 @@ class Tasks extends React.Component {
       let inputFields = Array.from(document.getElementsByClassName('edit-task'));
       inputFields.forEach(e => e.setAttribute("disabled", "true"));
 
-      axios.put('/api/update-task', this.state.editTask).then(result => console.log(result))
+      axios.put('/api/update-task', this.state.editTask).then(result => {
+			this.setState({editTaskStatus: result.status})
+		})
    }
 
 	
@@ -123,7 +129,7 @@ class Tasks extends React.Component {
 		const editTask = Object.assign({}, this.state.editTask)
 		editTask.name = '';
 		editTask.description = '';
-		editTask.estimated_cost = '';
+		editTask.cost = '';
 		this.setState({editTask});
 
 		//CHANGE EDIT TASK FIELDS TO BE UNEDITABLE
@@ -134,21 +140,25 @@ class Tasks extends React.Component {
 
 	handleCreateTask() {
 		let {createTask} = this.state;
-		axios.post('/api/create-task', createTask).then(res => console.log(res))
+		axios.post('/api/create-task', createTask).then(result => {
+			this.setState({createTaskStatus: result.status})
+		})
 	}
 
 
    render() {
 
-      let {tasks, edit, editTask, createTask} = this.state;
+      let {tasks, edit, editTask, createTask, editTaskStatus, createTaskStatus} = this.state;
       let existingTasks =  tasks.map((e, i) => 
          <div key={i} className="tasks-existing-task">
-            <span>Name: {`${e.name}`}</span>
-            <span>Last Update: {<Moment format="YYYY-MM-DD">{e.last_update}</Moment>}</span>
-            <span>Last Update By: {`${e.first_name} ${e.last_name}`}</span>
+            <span>Name: <span>{`${e.name}`}</span></span>
+            <span>Last Update: <span>{<Moment format="YYYY-MM-DD">{e.last_update}</Moment>}</span></span>
+            <span>Last Update By: <span>{`${e.first_name} ${e.last_name}`}</span></span>
             <a onClick={this.handleLoadEditTask.bind(this, i)}>Edit</a>
          </div>
-      )
+		)
+		
+		console.log(this.state.tasks);
 
       return(
          <div className="tasks-parent-container">
@@ -163,6 +173,7 @@ class Tasks extends React.Component {
 				<div className="tasks-child-right">
 					<div className="tasks-child-right1">
 						<h1>Edit Task</h1>
+						{editTaskStatus === 200 ? <div className="edit-task-status">Update Successful</div> : ''}
 						<div className="tasks-child-right-inner">
 
 							<span>Task Name</span>
@@ -194,10 +205,10 @@ class Tasks extends React.Component {
 							<input 
 								type="text"
 								className="edit-task"
-								value={editTask.estimated_cost}
+								value={editTask.cost}
 								onChange={e => {
 									let editTask = Object.assign({}, this.state.editTask)
-									editTask.estimated_cost = e.target.value;
+									editTask.cost = e.target.value;
 									this.setState({editTask});
 									}}
 								disabled />
@@ -211,6 +222,7 @@ class Tasks extends React.Component {
 								:
 								<div>
 								<button
+									className="settings-cancel-button"
 									onClick={this.handleCancelButton}>
 									Cancel
 								</button>
@@ -222,14 +234,12 @@ class Tasks extends React.Component {
 								</div>
 							}
 
-
-		
-
 							</div>
 					</div>
 						
 					<div className="tasks-child-right2">
 						<h1>Create Task</h1>
+						{createTaskStatus === 200 ? <div className="create-task-status">Task Created</div> : ''}
 						<div className="tasks-child-right-inner">
 							
 						<span>Task Name</span>
@@ -252,13 +262,13 @@ class Tasks extends React.Component {
 								this.setState({createTask})
 							}} />
 
-						<span>Estimated Cost</span>
+						<span>Cost</span>
 						<input 
 							type="text"
-							value={createTask.estimated_cost}
+							value={createTask.cost}
 							onChange={e => {
 								let createTask = Object.assign({}, this.state.createTask)
-								createTask.estimated_cost = e.target.value;
+								createTask.cost = e.target.value;
 								this.setState({createTask})
 							}} />
 

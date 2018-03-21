@@ -19,7 +19,7 @@ module.exports = {
 			const { id: agency_employees_id } = result[0];
 
 			//CREATE NEW USER
-			db.create_new_user([username, hash, agency_employees_id])
+			db.create_new_user([username, hash, agency_employees_id]).then(res.sendStatus(200))
 
 		})
 	},
@@ -45,7 +45,7 @@ module.exports = {
 			, user.email
 			, user.phone
 			, user.position
-			, ])
+			, ]).then(res.sendStatus(200))
 	},
 
 
@@ -59,51 +59,48 @@ module.exports = {
 
 
 	getTasks: (req, res) => {
-		const { agencyId } = req.query;
+		const { agency_id } = req.query;
 		const db = req.app.get('db');
 
-		db.retrieve_tasks([agencyId]).then(result =>
+		db.retrieve_tasks([agency_id]).then(result =>
 			res.status(200).send(result)
 		)
-
 	},
+
 
 	updateTask: (req, res) => {
 		const { name
 			, description
-			, estimated_cost
-			, task_id
+			, cost
+			, tasks_id
 			, last_update
-			, last_update_by_agency_employee_id } = req.body
+			, last_update_by_agency_employees_id } = req.body
 		const db = req.app.get('db');
 
-		db.update_task([name, description, estimated_cost, last_update, last_update_by_agency_employee_id, task_id]).then(result =>
-			res.status(200).send(result)
+		db.update_task([name, description, cost, last_update, last_update_by_agency_employees_id, tasks_id]).then(result =>
+			res.sendStatus(200)
 		)
-
 	},
 
 	createTask: (req, res) => {
 		const { name
 			, description
-			, estimated_cost
+			, cost
 			, date_created
-			, agency_employee_id
-			, agency_id
+			, agency_employees_id
+			, agencies_id
 			, last_update
-			, last_update_by_agency_employee_id } = req.body;
-
+			, last_update_agency_employees_id } = req.body;
 		const db = req.app.get('db');
 
 		db.create_new_task([name
 			, description
-			, estimated_cost
+			, cost
 			, date_created
-			, agency_employee_id
-			, agency_id
+			, agency_employees_id
+			, agencies_id
 			, last_update
-			, last_update_by_agency_employee_id]).then(result => res.status(200).send(result));
-
+			, last_update_agency_employees_id]).then(result => res.sendStatus(200));
 	},
 
 	getProducts: (req, res) => {

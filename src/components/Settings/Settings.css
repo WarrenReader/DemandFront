@@ -12,7 +12,7 @@
    flex: 1;
    position: relative;
    max-width: 400px;
-   max-height: 430px;
+   max-height: 440px;
 }
 
 .settings-inner-container {
@@ -25,7 +25,8 @@
 }
 
 .settings-inner-container > span {
-   margin-bottom: 5px;
+	margin-bottom: 5px;
+	font-size: 0.95em;
 }
 
 .settings-inner-container > input {
@@ -40,13 +41,13 @@
 }
 
 .settings-inner-container > button {
-   font-size: 0.9em;
-   width: 250px;
-   height: 30px;
-   margin: 15px auto 0 auto;
-   border: none;
-   border-radius: 2px;
-   cursor: pointer;
+	width: 200px;
+	padding: 8px;
+	margin: 10px auto 0 auto;
+	border-radius: 3px;
+	border: none;
+	font-size: 0.9em;
+	cursor: pointer;
 }
 
 .settings-edit-button {
@@ -60,9 +61,8 @@
 /* UPDATE STATUS ALERT */
 .settings-profile-status {
    position: absolute;
-   top: 7px;
-   left: 115px;
-   font-weight: 600;
+   top: 40px;
+   right: 15px;
    color: rgb(28, 180, 23);
    animation: fade 0.75s linear;
 }
@@ -71,9 +71,3 @@
    0%,100% { opacity: 0; }
    100% { opacity: 1; }
  }
-
-@media(min-width: 768px) {
-   .settings-profile-status {
-      left: 135px;
-   }
-}

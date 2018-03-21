@@ -1,3 +1,12 @@
-Select *, tasks.id as task_id FROM tasks
-JOIN agency_employee ON tasks.agency_employee_id = agency_employee.id
-WHERE agency_employee.id = $1;
+SELECT
+tasks.id AS tasks_id,
+name,
+description,
+cost,
+last_update,
+first_name,
+last_name
+FROM tasks
+JOIN agency_employees ON tasks.last_update_agency_employees_id = agency_employees.id
+WHERE tasks.agencies_id = $1;
+

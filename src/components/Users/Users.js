@@ -31,8 +31,9 @@ class Users extends React.Component {
             , phone: ''
             , position: ''
             , agencies_id: ''
-         }
-         
+			}
+			, editUserStatusResponse: ''
+			, createUserStatusResponse: ''
       }
       this.handleEditUser = this.handleEditUser.bind(this);
       this.handleDeleteUser = this.handleDeleteUser.bind(this);
@@ -64,7 +65,10 @@ class Users extends React.Component {
    
          //REMOVE DISABLED FROM EDIT USER INPUTS
          const editUserInputs = Array.from(document.getElementsByClassName('edit-user-input'));
-         editUserInputs.forEach(e => e.removeAttribute("disabled"));
+			editUserInputs.forEach(e => e.removeAttribute("disabled"));
+			
+			//UPDATE editUserStatusResponse ON STATE
+			this.setState({editUserStatusResponse: ''})
       }
    }
 
@@ -116,7 +120,9 @@ class Users extends React.Component {
 
       //ENDPOINT
       const user = this.state.editUser;
-      axios.put('/api/update-user', {user})
+      axios.put('/api/update-user', {user}).then(result => {
+			this.setState({editUserStatusResponse: result.status})
+		})
    }
 
 
@@ -125,7 +131,7 @@ class Users extends React.Component {
 		const {newUser} = this.state;
 
       axios.post(`/api/create-user`, newUser).then(result => {
-         console.log(result);
+         this.setState({createUserStatusResponse: result.status})
       });
    }
 
@@ -145,12 +151,10 @@ class Users extends React.Component {
       this.setState({editUser});
    }   
 
-   
-
 
    render() {
 
-      let {editUser, editUserStatus, newUser} = this.state;
+      let {editUser, editUserStatus, newUser, editUserStatusResponse, createUserStatusResponse} = this.state;
       const {existing_users} = this.state;
 
       const existing_users_content = existing_users.map((e, index) => 
@@ -173,10 +177,11 @@ class Users extends React.Component {
             </div>
 
             <div className="users-edit-user">
-               <h1>Edit User</h1>
+					<h1>Edit User</h1>
+					{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
                <div className="users-edit-user-child">
 
-                  <span>Username:</span>
+                  <span>Username</span>
                   <input 
                      placeholder="Select A User To Edit"
                      type="text"
@@ -189,7 +194,7 @@ class Users extends React.Component {
                      }} 
                      disabled />
          
-                  <span>First Name:</span>
+                  <span>First Name</span>
                   <input 
                      type="text"
                      value={editUser.first_name}
@@ -201,7 +206,7 @@ class Users extends React.Component {
                      }} 
                      disabled />
 
-                  <span>Last Name:</span>
+                  <span>Last Name</span>
                   <input 
                      type="text"
                      value={editUser.last_name}
@@ -213,7 +218,7 @@ class Users extends React.Component {
                      }} 
                      disabled />
 
-                  <span>Email:</span>
+                  <span>Email</span>
                   <input
                      type="text"
                      value={editUser.email}
@@ -225,7 +230,7 @@ class Users extends React.Component {
                      }}  
                      disabled />
 
-                  <span>Phone:</span>
+                  <span>Phone</span>
                   <input 
                      type="text"
                      value={editUser.phone}
@@ -237,7 +242,7 @@ class Users extends React.Component {
                      }} 
                      disabled />
 
-                  <span>Position:</span>
+                  <span>Position</span>
                   <input 
                      type="text"
                      value={editUser.position}
@@ -265,13 +270,12 @@ class Users extends React.Component {
             </div>
             
 
-
-
             <div className="create-new-user-parent-container">
-               <h1>Create New User</h1>
+					<h1>Create New User</h1>
+					{createUserStatusResponse === 200 ? <div className="create-user-status">User Created</div> : ''}
                <div className="create-new-user-child-container">
                   <div className="create-new-user-form">
-                     <span>Username:</span>
+                     <span>Username</span>
                      <input 
                         type="text"
                         value={newUser.username}
@@ -281,7 +285,7 @@ class Users extends React.Component {
 									this.setState({newUser});
                         }}
                      />
-                     <span>Password:</span>
+                     <span>Password</span>
                      <input 
                         type="password" 
                         value={newUser.password}
@@ -291,7 +295,7 @@ class Users extends React.Component {
 									this.setState({newUser});
 								}}
 								/>
-                     <span>First Name:</span>
+                     <span>First Name</span>
                      <input 
                         type="text"
                         value={newUser.first_name}
@@ -301,7 +305,7 @@ class Users extends React.Component {
 									this.setState({newUser});
                         }}
 								/>
-                     <span>Last Name:</span>
+                     <span>Last Name</span>
                      <input 
                         type="text"
                         value={newUser.last_name}
@@ -311,7 +315,7 @@ class Users extends React.Component {
 									this.setState({newUser});
                         }}
 								/>
-                     <span>Email:</span>
+                     <span>Email</span>
                      <input
                         type="text"
                         value={newUser.email}
@@ -321,7 +325,7 @@ class Users extends React.Component {
 									this.setState({newUser});
                         }}
 								/>
-                     <span>Phone:</span>
+                     <span>Phone</span>
                      <input 
                         type="text"
                         value={newUser.phone}
@@ -331,7 +335,7 @@ class Users extends React.Component {
 									this.setState({newUser});
                         }}
 								/>
-                     <span>Position:</span>
+                     <span>Position</span>
                      <input 
                         type="text"
                         value={newUser.position}

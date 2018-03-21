@@ -1,11 +1,11 @@
 INSERT INTO tasks
 (name
 , description
-, estimated_cost
+, cost
 , date_created
-, agency_employee_id
-, agency_id
+, agency_employees_id
+, agencies_id
 , last_update
-, last_update_by_agency_employee_id)
+, last_update_agency_employees_id)
 VALUES
 ($1, $2, $3, $4, $5, $6, $7, $8)

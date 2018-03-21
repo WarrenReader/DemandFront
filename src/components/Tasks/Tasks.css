@@ -10,9 +10,9 @@
    display: flex;
    flex-direction: column;
    width: 100%;
-   max-width: 600px;
+   max-width: 450px;
    height: 400px;
-   margin-bottom: 25px;
+   margin-bottom: 30px;
 }
 
 .tasks-child-left-inner {
@@ -21,7 +21,7 @@
    flex: 1;
    background: rgb(240, 240, 240);
    border-radius: 5px;
-   padding: 12px;
+   padding: 10px;
    overflow-y: scroll;
 }
 
@@ -35,10 +35,24 @@
 .tasks-child-right1 {
    display: flex;
    flex-direction: column;
+   position: relative;
    width: 100%;
    max-width: 450px;
-   height: 375px;
-   margin-bottom: 25px;
+   height: 350px;
+   margin-bottom: 30px;
+}
+
+.tasks-child-right1 .edit-task-status {
+   position: absolute;
+   top: 40px;
+   right: 15px;
+   color: rgb(28, 180, 23);
+   animation: fade 0.75s linear;
+}
+
+@keyframes fade {
+   0%,100% { opacity: 0; }
+   100% { opacity: 1; }
 }
 
 .tasks-child-right-inner {
@@ -53,27 +67,37 @@
 
 /* EXISTING TASKS */
 .tasks-existing-task {
-   background: rgb(220, 220, 220);
-   padding: 8px;
-   margin-bottom: 12px;
-   border-radius: 3px;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 5px;
    position: relative;
+   background: rgb(220, 220, 220);
+   font-size: 0.9em;
 }
 
 .tasks-existing-task:last-of-type {
    margin-bottom: 0px;
 }
 
-.tasks-existing-task span {
+.tasks-existing-task > span {
    display: block;
-   font-size: 0.95em;
-   padding: 2px 5px 2px 0;
+   margin-bottom: 6px;
+   font-weight: 700;
 }
+
+.tasks-existing-task span:last-of-type {
+   margin-bottom: 0px;
+}
+
+.tasks-existing-task > span > span{
+   font-weight: 400;
+}
+
 
 .tasks-existing-task a {
    position: absolute;
-   top: 8px;
-   right: 8px;
+   top: 12px;
+   right: 12px;
    font-size: 0.9em;
    text-decoration: underline;
 }
@@ -81,19 +105,23 @@
 
 /* EDIT TASK */
 .tasks-child-right-inner span{
-   margin-bottom: 4px;
+   display: block;
+   margin-bottom: 5px;
+   font-size: 0.95em;
 }
 
 .tasks-child-right-inner input{
-   font-size: 0.9em;
+   height: 28px;
+   box-sizing: border-box;
    margin-bottom: 15px;
    padding: 5px;
-   border: none;
+   font-size: 1em;
    border-radius: 3px;
+   border: none;
 }
 
 .tasks-child-right-inner input[disabled] {
-   background: rgb(220, 220, 220);
+   background: rgb(225, 225, 225);
 }
 
 .tasks-child-right-inner textarea{
@@ -105,14 +133,14 @@
 }
 
 .tasks-child-right-inner textarea[disabled] {
-   background: rgb(220, 220, 220);
+   background: rgb(225, 225, 225);
 }
 
 .tasks-child-right-inner button {
    font-size: 0.9em;
    width: 250px;
    height: 30px;
-   margin: 10px auto 0 auto;
+   margin: 5px auto 0 auto;
    border: none;
    border-radius: 2px;
    cursor: pointer;
@@ -128,38 +156,44 @@
 
 }
 
-
-
-
 .settings-create-button {
-   background: rgba(82, 241, 76, 0.8);
+   background: rgba(82, 241, 76, 0.7);
 }
 
 .settings-edit-button {
-   background: rgba(185, 185, 185, 0.8);
+   background: rgb(185, 185, 185);
 }
 
 .settings-save-button {
-   background: rgba(82, 241, 76, 0.8);
+   background: rgba(82, 241, 76, 0.7);
 }
 
-.settings-create-button {
-   background: rgba(82, 241, 76, 0.8);
+.settings-cancel-button {
+   background: rgb(185, 185, 185);
 }
 
 /*CREATE TASK*/
 .tasks-child-right2 {
    display: flex;
    flex-direction: column;
+   position: relative;
    width: 100%;
    max-width: 450px;
-   height: 375px;
+   height: 350px;
+}
+
+.tasks-child-right2 > .create-task-status {
+   position: absolute;
+   top: 40px;
+   right: 15px;
+   color: rgb(28, 180, 23);
+   animation: fade 0.75s linear;
 }
 
 @media(min-width:1024px) {
    .tasks-parent-container {
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
       align-items: stretch;
       flex: 1;
    }
@@ -167,16 +201,16 @@
    .tasks-child-left {
       width: auto;
       height: auto;
-      max-height: 763px;
+      max-height: 732px;
       flex: 1;
       margin-bottom: 0px;
    }
 
    .tasks-child-right {
-      width: auto;
+      max-width: 450px;
       height: auto;
       flex: 1;
-      margin-left: 30px;
+      margin-left: 75px;
    }
 
 }
