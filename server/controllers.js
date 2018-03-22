@@ -136,7 +136,6 @@ module.exports = {
 		const db = req.app.get('db');
 
 		db.retrieve_roadmaps([agencyId]).then(result => res.status(200).send(result))
-
 	},
 
 	getTask: (req, res) => {

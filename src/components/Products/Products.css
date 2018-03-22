@@ -85,7 +85,7 @@
 
 .products-container-bottom-right .add-note {
    position: absolute;
-   top: 2px;
+   top: 0;
    right: 5px;
    text-decoration: underline;
    color: blue;
@@ -158,9 +158,10 @@
 
 .product-client-list {
    flex-grow: 1;
-   max-height: 350px;
+   min-height: 350px;
    background:rgb(220, 220, 220);
    border-radius: 5px;
+   margin-top: 5px;
    padding: 10px;
    overflow-y: scroll;
    font-size: 0.9em;
@@ -187,9 +188,10 @@
 }
 
 .product-notes {
-   max-height: 350px;
+   min-height: 350px;
    flex-grow: 1;
    background:rgb(220, 220, 220);
+   margin-top: 5px;
    padding: 10px;
    border-radius: 5px;
    overflow-y: scroll;
@@ -334,14 +336,23 @@
 
    .products-container-left {
       flex: 1;
-      height: auto;
+      height: 750px;
       margin-bottom: 0px;
    }
 
    .products-container-right {
       flex: 2;
       width: auto;
+      height: 750px;
       margin-left: 40px;
+   }
+
+   .product-client-list {
+      max-height: 100%;
+   }
+
+   .product-notes {
+      max-height: 100%;
    }
 
 }

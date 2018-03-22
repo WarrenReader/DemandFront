@@ -14,11 +14,13 @@ const controllers = require('./controllers.js');
 
 //SETUP APP
 const app = express();
+app.use(express.static(`${__dirname}/../build`))
 
 //IMPORT VARAIBLES FROM .env
 const {SESSION_PORT
       , CONNECTION_STRING
-		, SESSION_SECRET} = process.env;
+		, SESSION_SECRET
+		, REACT_APP_LOGIN_PAGE} = process.env;
 
 //CONNECT DATABASE
 massive(CONNECTION_STRING).then(db => {
@@ -87,7 +89,7 @@ app.post('/api/login', passport.authenticate('local'), (req, res, next) => {
 
 app.get('/logout', (req,res) => {
 	req.logout();
-	res.redirect('http://localhost:3000/#/');
+	res.redirect(REACT_APP_LOGIN_PAGE);
 })
 
 //CONFIRM USER SESSION

@@ -1,4 +1,12 @@
-SELECT *, roadmaps.id as roadmap_id FROM roadmaps
-
-JOIN agency_employee ON roadmaps.agency_employee_id = agency_employee.id
-WHERE roadmaps.agency_id = $1;
+SELECT
+roadmaps.id as roadmaps_id,
+name,
+description,
+tasks,
+last_update,
+first_name,
+last_name,
+roadmaps.agencies_id
+FROM roadmaps
+JOIN agency_employees ON roadmaps.agency_employees_id = agency_employees.id
+WHERE roadmaps.agencies_id = $1;

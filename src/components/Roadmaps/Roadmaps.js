@@ -30,7 +30,9 @@ class Roadmaps extends React.Component {
 
    componentWillMount() {
       const {agencies_id} = this.props.user;
-      axios.get(`/api/roadmaps/?agencyId=${agencies_id}`).then(res => this.setState({roadmaps: res.data}))
+      axios.get(`/api/roadmaps/?agencyId=${agencies_id}`).then(res => {
+			this.setState({roadmaps: res.data})
+      })
    }
 
    handleEditButton(index) {
@@ -75,9 +77,9 @@ class Roadmaps extends React.Component {
       const {roadmaps, roadmap, tasksArray} = this.state;
       const availableRoadmaps = roadmaps.map((e,index) => 
          <div key={index} className="unique-roadmap">
-            <span>Name: {e.name}</span>
-            <span>Created By: {`${e.first_name} ${e.last_name}`}</span>
-            <span>Tasks: {e.tasks.length}</span>
+            <span>Name: <span>{e.name}</span></span>
+            <span>Created By: <span>{`${e.first_name} ${e.last_name}`}</span></span>
+            <span>Tasks: <span>{e.tasks.length}</span></span>
             <a onClick={this.handleEditButton.bind(this, index)}>Edit</a>
          </div>
       )
@@ -94,7 +96,7 @@ class Roadmaps extends React.Component {
          <div className="roadmaps-parent-container">
 
             <div className="roadmaps-child-container-left">
-               <h1>Available Roadmaps</h1>
+               <h1>Existing Roadmaps</h1>
                <div className="roadmaps-child-container-left-inner">
                   {availableRoadmaps}
                </div>
@@ -106,16 +108,16 @@ class Roadmaps extends React.Component {
                   <h1>View/Edit Roadmap</h1>
                   <div className="roadmaps-child-container-right-1-inner">
 
-                     <span>Name:</span>
+                     <span>Name</span>
                      <input type="text" value={roadmap.name} placeholder="Select A Roadmap"></input>
 
-                     <span>Created By:</span>
+                     <span>Created By</span>
                      <span className="roadmaps-static-span">{`${roadmap.first_name} ${roadmap.last_name}`}</span>
 
-                     <span>Total Tasks:</span>
+                     <span>Total Tasks</span>
                      <span className="roadmaps-static-span">{roadmap.total_tasks}</span>
 
-                     <span>Current Task List:</span>
+                     <span>Current Task List</span>
                      <div className="current-task-list">
                         {tasks}
                      </div>

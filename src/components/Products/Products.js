@@ -263,30 +263,6 @@ class Products extends React.Component {
 											<span>Price:</span>
 										</div>
 
-										<div className="unique-client-row">
-											<span>Client:</span>
-											<span>Product Added:</span>
-											<span>Price:</span>
-										</div>
-
-										<div className="unique-client-row">
-											<span>Client:</span>
-											<span>Product Added:</span>
-											<span>Price:</span>
-										</div>
-
-										<div className="unique-client-row">
-											<span>Client:</span>
-											<span>Product Added:</span>
-											<span>Price:</span>
-										</div>
-
-										<div className="unique-client-row">
-											<span>Client:</span>
-											<span>Product Added:</span>
-											<span>Price:</span>
-										</div>
-
 									</div>
 								</div>
 
