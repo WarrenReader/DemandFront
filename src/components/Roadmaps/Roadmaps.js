@@ -22,10 +22,14 @@ class Roadmaps extends React.Component {
             , estimated_cost: ''
             , roadmap_id: ''
          }
+         , edit: false
       }
 
-      this.handleEditButton = this.handleEditButton.bind(this);
+      this.handleLoadRoadmapButton = this.handleLoadRoadmapButton.bind(this);
       this.handleTasksArray = this.handleTasksArray.bind(this);
+      this.handleEditButton = this.handleEditButton.bind(this);
+      this.handleCancelButton = this.handleCancelButton.bind(this);
+
    }
 
    componentWillMount() {
@@ -35,7 +39,7 @@ class Roadmaps extends React.Component {
       })
    }
 
-   handleEditButton(index) {
+   handleLoadRoadmapButton(index) {
       const selectedRoadmap = this.state.roadmaps[index];
       const roadmap = Object.assign({}, this.state.roadmap);
       roadmap.name = selectedRoadmap.name;
@@ -71,16 +75,53 @@ class Roadmaps extends React.Component {
    }
 
 
+   handleEditButton() {
+
+		if(this.state.roadmap.name !== ''){
+			//CHANGE edit ON STATE TO BE true
+			this.setState((prevState) => {
+				return {edit: !prevState.edit}
+			})
+
+			//CHANGE EDIT TASK FIELDS TO BE EDITABLE
+			let inputFields = Array.from(document.getElementsByClassName('edit-roadmap'));
+			inputFields.forEach(e => e.removeAttribute("disabled"));
+		}
+   }
+
+
+   handleCancelButton() {
+		//CHANGE edit ON STATE TO BE false
+		this.setState((prevState) => {
+			return {edit: !prevState.edit}
+		})
+
+		//CLEAR EDIT TASK FIELDS
+		const roadmap = Object.assign({}, this.state.roadmap)
+		roadmap.name = '';
+    roadmap.first_name = '';
+    roadmap.last_name = '';
+    roadmap.total_tasks= '';
+    roadmap.tasks = '';
+    roadmap.estimated_cost = '';
+    roadmap.roadmap_id = '';
+    this.setState({roadmap});
+    this.setState({tasksArray: []});
+
+		//CHANGE EDIT TASK FIELDS TO BE UNEDITABLE
+		let inputFields = Array.from(document.getElementsByClassName('edit-roadmap'));
+		inputFields.forEach(e => e.setAttribute("disabled", "true"));
+	}
 
 
    render() {
-      const {roadmaps, roadmap, tasksArray} = this.state;
+      const {roadmaps, roadmap, tasksArray, edit} = this.state;
       const availableRoadmaps = roadmaps.map((e,index) => 
          <div key={index} className="unique-roadmap">
             <span>Name: <span>{e.name}</span></span>
             <span>Created By: <span>{`${e.first_name} ${e.last_name}`}</span></span>
             <span>Tasks: <span>{e.tasks.length}</span></span>
-            <a onClick={this.handleEditButton.bind(this, index)}>Edit</a>
+            <a onClick={this.handleLoadRoadmapButton.bind(this, index)}>Edit</a>
          </div>
       )
 
@@ -109,13 +150,34 @@ class Roadmaps extends React.Component {
                   <div className="roadmaps-child-container-right-1-inner">
 
                      <span>Name</span>
-                     <input type="text" value={roadmap.name} placeholder="Select A Roadmap"></input>
+                     <input className="edit-roadmap" type="text" value={roadmap.name} placeholder="Select A Roadmap" disabled/>
 
                      <span>Created By</span>
                      <span className="roadmaps-static-span">{`${roadmap.first_name} ${roadmap.last_name}`}</span>
 
                      <span>Total Tasks</span>
                      <span className="roadmaps-static-span">{roadmap.total_tasks}</span>
+
+                     {edit === false ? 
+                      <button
+                        className="settings-edit-button"
+                        onClick={this.handleEditButton}>
+                        Edit
+                      </button>
+                      :
+                      <div className="button-container">
+                      <button
+                        className="settings-cancel-button"
+                        onClick={this.handleCancelButton}>
+                        Cancel
+                      </button>
+                      <button 
+                        className="settings-save-button"
+                        onClick={this.handleSaveButton}>
+                        Save
+                      </button>
+                      </div>
+                    }
 
                      <span>Current Task List</span>
                      <div className="current-task-list">

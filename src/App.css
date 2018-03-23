@@ -1,25 +1,21 @@
-.raleway {
-  font-family: 'Raleway', sans-serif;
-}
-
-.raleway-bold {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-}
-
-.App {
+.app {
   min-height: 100%;
   background: rgb(236, 236, 236);
 }
 
 .main-body {
-  display: flex;
-  flex-direction: column;
   position: absolute;
   left: 0;
   right: 0;
   max-width: 1350px;
   min-height: calc(100% - 95px);
-  padding-top: 95px;
   margin: auto;
+  padding-top: 95px;
+  background: rgb(255, 255, 255);
+}
+
+
+/* GLOBAL CSS */
+.raleway {
+  font-family: 'Raleway', sans-serif;
 }

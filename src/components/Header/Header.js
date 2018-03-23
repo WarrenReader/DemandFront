@@ -66,7 +66,7 @@ class Header extends React.Component {
 									</Link>
 								</li>
 								<li className="header-link-mobile" onClick={this.handleMobileCollapse}>
-									<Link to='/settings'>Settings</Link>
+									<Link to='/settings'>Account</Link>
 								</li>
 
 								<li className="header-link-mobile"
@@ -82,7 +82,7 @@ class Header extends React.Component {
 									</label>
 									<ul className="profile-menu raleway">
 										<li onClick={this.handleDesktopCollapse}>
-											<Link to='/settings'>Settings</Link>
+											<Link to='/settings'>Account</Link>
 										</li>
 										<li onClick={this.handleDesktopCollapse}>
 											<a href={process.env.REACT_APP_LOGOUT}>Logout</a>

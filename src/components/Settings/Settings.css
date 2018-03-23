@@ -1,73 +1,32 @@
-.settings-parent-container {
-   display: flex;
-   justify-content: center;
-   flex: 1;
-   padding: 30px;
-   background: white;
+.account-parent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  margin: auto;
+  box-sizing: border-box;
 }
 
-.settings-child-container {
-   display: flex;
-   flex-direction: column;
-   flex: 1;
-   position: relative;
-   max-width: 400px;
-   max-height: 440px;
-}
-
-.settings-inner-container {
-   display: flex;
-   flex-direction: column;
-   flex: 1;
-   border-radius: 5px;
-   padding: 20px;
-   background:rgb(240, 240, 240);
-}
-
-.settings-inner-container > span {
-	margin-bottom: 5px;
-	font-size: 0.95em;
-}
-
-.settings-inner-container > input {
-   font-size: 1em;
-   padding: 6px;
-   margin-bottom: 10px;
-   border: none;
-}
-
-.settings-inner-container > input[disabled] {
-   background: rgb(225, 225, 225);
-}
-
-.settings-inner-container > button {
-	width: 200px;
-	padding: 8px;
-	margin: 10px auto 0 auto;
-	border-radius: 3px;
-	border: none;
-	font-size: 0.9em;
-	cursor: pointer;
-}
-
-.settings-edit-button {
-   background: rgb(185, 185, 185);
-}
-
-.settings-save-button {
-   background: rgba(82, 241, 76, 0.8);
+.account-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding: 0 15px;
 }
 
 /* UPDATE STATUS ALERT */
-.settings-profile-status {
-   position: absolute;
-   top: 40px;
-   right: 15px;
-   color: rgb(28, 180, 23);
-   animation: fade 0.75s linear;
+.account-child > .update-status {
+  position: absolute;
+  top: -45px;
+  right: 3px;
+  color: rgb(37, 212, 31);
+  animation: fade 0.75s linear;
 }
 
 @keyframes fade {
-   0%,100% { opacity: 0; }
-   100% { opacity: 1; }
- }
+  0%,100% { opacity: 0; }
+  100% { opacity: 1; }
+}
