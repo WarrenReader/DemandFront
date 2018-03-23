@@ -1,6 +1,6 @@
 //MODULES
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 //CSS, ASSETS
@@ -12,9 +12,10 @@ class Header extends React.Component {
    constructor(props) {
 		super(props)
 		this.state = {
-			path: ''
-			, view: 'dashboard'
+			path: '',
+			view: 'dashboard'
 		}
+
 		this.handleDesktopCollapse = this.handleDesktopCollapse.bind(this)
    }
 
@@ -33,12 +34,11 @@ class Header extends React.Component {
 
    render() {
 
-		const {first_name: firstName = '', last_name: lastName = ''} = this.props.user;
+		const {first_name = '', last_name = ''} = this.props.user;
 		const {headerVisibility} = this.props;
 		const {view} = this.state;
 		
 		return (
-			
 			<div className="header-container">
 				{ headerVisibility &&
 					<div>
@@ -77,7 +77,7 @@ class Header extends React.Component {
 								<div className="profile-dropdown">
 									<input className="menu-btn" type="checkbox" id="profile-btn" />
 									<label className="menu-icon" htmlFor="profile-btn">
-										<span className="header-profile-name raleway">{`${firstName} ${lastName}`}</span>
+										<span className="header-profile-name">{`${first_name} ${last_name}`}</span>
 										<i className="arrow down"></i>
 									</label>
 									<ul className="profile-menu raleway">

@@ -36,7 +36,7 @@ module.exports = {
 	updateUser: (req, res) => {
 		const {user} = req.body;
 		const db = req.app.get('db');
-		
+
 		db.update_user([
 			user.agency_employees_id
 			, user.username
@@ -46,15 +46,6 @@ module.exports = {
 			, user.phone
 			, user.position
 			, ]).then(res.sendStatus(200))
-	},
-
-
-	deleteUser: (req, res) => {
-
-		const {agency_employees_id} = req.body;
-		const db = req.app.get('db');
-		
-		db.delete_user([agency_employees_id])
 	},
 
 
