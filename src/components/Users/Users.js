@@ -8,6 +8,9 @@
 
 	//COMPONENTS
 	import HorizontalLine from '../Assets/HorizontalLine/HorizontalLine.js';
+	import ExistingUsersTable from './ExistingUsersTable/ExistingUsersTable.js';
+	import EditUser from './EditUser/EditUser.js';
+	import CreateUser from './CreateUser/CreateUser.js';
 
 	//COMPONENT
 	class Users extends React.Component {
@@ -39,8 +42,7 @@
 				, createUserStatusResponse: ''
 			}
 
-			this.handleCancel = this.handleCancel.bind(this);
-			this.handleSaveChanges = this.handleSaveChanges.bind(this);
+			this.handleSave = this.handleSave.bind(this);
 			this.handleCreateNewUser = this.handleCreateNewUser.bind(this);
 			this.handleEditUser = this.handleEditUser.bind(this);
 		}
@@ -75,7 +77,7 @@
 		}   
 
 
-		handleSaveChanges() {
+		handleSave() {
 			//RESET editUserStatusResponse
 			this.setState({editUserStatusResponse: ''})
 
@@ -86,39 +88,6 @@
 		}
 
 
-		handleCancel() {
-			this.setState((prevState) => {
-				return {editUserStatus: !prevState.editUserStatus}
-			})
-
-			//ADD DISABLED TO EDIT USER INPUTS
-			const editUserInputs = Array.from(document.getElementsByClassName('edit-user'));
-			editUserInputs.forEach(e => e.setAttribute('disabled', 'true'));
-
-			//RESET EDIT USER INPUTS
-			const editUser = this.state.editUser;
-			editUser.username = '';
-			editUser.first_name = '';
-			editUser.last_name = '';
-			editUser.email = '';
-			editUser.phone = '';
-			editUser.position = '';
-			editUser.agency_employees_id = '';
-			this.setState({editUser});
-		}
-
-
-
-
-
-
-	
-
-
-		
-
-
-		
 
 		handleCreateNewUser() {
 			const {newUser} = this.state;
@@ -136,50 +105,36 @@
 
 			let {existing_users, editUser, editUserStatus, newUser, editUserStatusResponse, createUserStatusResponse} = this.state;
 
-			const existingUsers = existing_users.map((e, index) => 
-			<tr class="table-row">
-				<td>{e.username}</td>
-				<td>{e.first_name}</td>
-				<td>{e.last_name}</td>
-				<td>{e.email}</td>
-				<td><button className="edit" onClick={() => this.handleEditUser(index)}>Edit</button></td>
-			</tr>
-			);
-
 			return(
 				<div className="users-parent">
 					<h1>Existing Users</h1>
 					<HorizontalLine />
+					<ExistingUsersTable existingUsers={existing_users} onClick={this.handleEditUser}/>
+
+					
+					<h1>Edit User</h1>
+					<HorizontalLine />
+					<EditUser
+						user={editUser}
+					/>
+					{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
+
+
+					<h1>Create User</h1>
+					<HorizontalLine />
+					<CreateUser />
+
+
+					
+
 					
 					<div className="overflow">
-					<table className="existing-users-table">
-						
-						<thead>
-							<tr className="table-header">
-								<th>Username</th>
-								<th>First Name</th>
-								<th>Last Name</th>
-								<th>Email</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-
-						<tbody className="table-body">
-							{existingUsers}
-						</tbody>
-
-					</table>
-					</div>
-
-					<h1>Edit User</h1>
-						<HorizontalLine />
-						{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
-						<div className="overflow">
-						<table className="edit-user-table">
+						<table className="create-user-table">
 							
 							<thead>
 								<tr className="table-header">
 									<th>Username</th>
+									<th>Password</th>
 									<th>First Name</th>
 									<th>Last Name</th>
 									<th>Email</th>
@@ -187,51 +142,53 @@
 								</tr>
 							</thead>
 
-							{this.state.editUser.username !== '' ?
 							<tbody className="table-body">
-								<tr class="table-row">
+								<tr className="table-row">
 									<td><input type="text" 
-											className="edit-user" 
-											value={editUser.username}
-											placeHolder="Select A User"
+											value={newUser.username}
 											onChange={e => {
-												const editUser = Object.assign({}, this.state.editUser);
-												editUser.username = e.target.value;
-												this.setState({editUser});}}
+												const newUser = Object.assign({}, this.state.newUser);
+												newUser.username = e.target.value;
+												this.setState({newUser});}}
 									/></td>
 									<td><input type="text"  
-											className="edit-user" 
-											value={editUser.first_name}
+											value={newUser.password}
 											onChange={e => {
-												const editUser = Object.assign({}, this.state.editUser);
-												editUser.first_name = e.target.value;
-												this.setState({editUser});}}
+												const newUser = Object.assign({}, this.state.newUser);
+												newUser.password = e.target.value;
+												this.setState({newUser});}}
 									/></td>
 									<td><input type="text"  
-											className="edit-user" value={editUser.last_name}
+											value={newUser.first_name}
 											onChange={e => {
-												const editUser = Object.assign({}, this.state.editUser);
-												editUser.last_name = e.target.value;
-												this.setState({editUser});}}
+												const newUser = Object.assign({}, this.state.newUser);
+												newUser.first_name = e.target.value;
+												this.setState({newUser});}}
 									/></td>
 									<td><input type="text"  
-											className="edit-user" value={editUser.email}
+											value={newUser.last_name}
 											onChange={e => {
-												const editUser = Object.assign({}, this.state.editUser);
-												editUser.email = e.target.value;
-												this.setState({editUser});}}
+												const newUser = Object.assign({}, this.state.newUser);
+												newUser.last_name = e.target.value;
+												this.setState({newUser});}}
+									/></td>
+									<td><input type="text"  
+											value={newUser.email}
+											onChange={e => {
+												const newUser = Object.assign({}, this.state.newUser);
+												newUser.email = e.target.value;
+												this.setState({newUser});}}
 									/></td>
 									<td><button type="text"
-											className="edit-user" className="update" onClick={this.handleSaveChanges}>Update</button>
+											className="update" onClick={this.handleSaveChanges}>Update</button>
 											<button type="text"  
-											className="edit-user" className="cancel" onClick={this.handleCancel}>Cancel</button>
+											className="cancel" onClick={this.handleCancel}>Cancel</button>
 									</td>
 								</tr>
 							</tbody>
-							: <tbody className="table-body"><tr><td className="edit-prompt">Select A User Above To Edit</td></tr></tbody>}
 
 						</table>
-						</div>
+					</div>
 						
 
 

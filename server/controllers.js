@@ -37,6 +37,8 @@ module.exports = {
 		const {user} = req.body;
 		const db = req.app.get('db');
 
+		console.log(user);
+
 		db.update_user([
 			user.agency_employees_id
 			, user.username

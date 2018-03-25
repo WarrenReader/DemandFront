@@ -1,0 +1,88 @@
+.existing-users-table {
+   width: 100%;
+   max-width: 1200px;
+   margin: 0 auto 40px auto;
+   border-radius: 3px;
+   font-size: 1em;
+   overflow-x: scroll;
+}
+
+.existing-users-table > table {
+   min-width: 640px;
+   width: 100%;
+   height: 221px;
+   display: inline-block;
+   font-size: 0.75em;
+}
+
+.existing-users-table > table > thead {
+   display: inline;
+}
+
+.existing-users-table > table > thead > tr {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   font-weight: 600;
+   background: rgb(230, 230, 230);
+   border-bottom: 2px solid rgb(200, 200, 200);
+}
+
+.existing-users-table > table > thead > tr > th {
+   min-width: 105px;
+   padding: 6px 10px 6px 5px;
+   text-align: left;
+}
+
+.existing-users-table > table > thead > tr > th:nth-child(4) {
+   width: 185px;
+}
+
+.existing-users-table > table > thead > tr > th:nth-child(5) {
+   text-align: center;
+   min-width: 50px;
+}
+
+.existing-users-table > table > tbody {
+   height: 190px;
+   display: block;
+   overflow-y: scroll;
+   background: rgb(245, 245, 245);
+}
+
+.existing-users-table > table > tbody > tr {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+
+.existing-users-table > table > tbody > tr:nth-child(2n + 2) {
+   background: rgb(230, 230, 230);
+}
+
+.existing-users-table > table > tbody > tr > td {
+   min-width: 105px;
+   padding: 8px 10px 8px 8px;
+}
+
+.existing-users-table > table > tbody > tr > td:nth-child(4){
+   width: 185px;
+}
+
+.existing-users-table > table > tbody > tr > td:nth-child(5){
+   min-width: 50px;
+   padding: 4px 10px 4px 8px;
+}
+
+.existing-users-table > table > tbody > tr > td > .edit {
+   padding: 3px 15px;
+   background: rgb(206, 206, 206);
+   border-radius: 3px;
+   border: none;
+   cursor: pointer;
+   outline: none;
+}
+
+.existing-users-table > table > tbody > tr > td > .edit:active {
+   background: rgb(255, 194, 79);
+}
