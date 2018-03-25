@@ -8,7 +8,7 @@
 }
 
 .create-user-table > table {
-   min-width: 725px;
+   min-width: 785px;
    width: 100%;
    height: 65px;
    display: inline-block;
@@ -34,6 +34,11 @@
    text-align: left;
 }
 
+.create-user-table > table > thead > tr > th:nth-child(6) {
+   min-width: 145px;
+   text-align: center;
+}
+
 .create-user-table > table > tbody {
    height: 34px;
    display: block;
@@ -52,11 +57,24 @@
    padding: 5px 8px 6px 8px;
 }
 
+.create-user-table > table > tbody > tr > td:nth-child(6) {
+   min-width: 145px;
+}
+
 .create-user-table > table > tbody > tr > td > input {
    width: 100px;
    padding: 3px;
    border: 1px solid #e6ecf0;
    border-radius: 3px;
+}
+
+.create-user-table > table > tbody > tr > td > button.update {
+   padding: 4px 15px;
+   background: rgb(145, 255, 140);
+   border-radius: 3px;
+   border: none;
+   cursor: pointer;
+   outline: none;
 }
 
 .create-user-table > table > tbody > tr > td > button.update {
@@ -82,4 +100,14 @@
 /* EDIT PROPMPT */
 .create-user-table table > tbody > tr > td.edit-prompt {
    padding: 0 0 4px 0;
+}
+
+/* EDIT SUCCESSFUL */
+.create-user-table > .status {
+   position: absolute;
+   top: 501px;
+   left: 170px;
+   color: rgb(25, 207, 19);
+   font-weight: 600;
+   animation: fade 0.75s linear;
 }

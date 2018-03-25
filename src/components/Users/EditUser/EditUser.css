@@ -113,5 +113,15 @@
 
 /* EDIT PROPMPT */
 .edit-user-table table > tbody > tr > td.edit-prompt {
-   padding: 0 0 4px 0;
+   padding-top: 10px;
+}
+
+/* EDIT SUCCESSFUL */
+.edit-user-table > .status {
+   position: absolute;
+   top: 346px;
+   left: 140px;
+   color: rgb(25, 207, 19);
+   font-weight: 600;
+   animation: fade 0.75s linear;
 }

@@ -33,6 +33,9 @@ export default class ExitUser extends React.Component {
 
 
    handleSave() {
+      //RESET STATUS
+      this.setState({status: ''})
+
       const user = this.state.user;
       axios.put('/api/update-user', {user}).then(result => {
          this.setState({status: result.status})
@@ -51,6 +54,9 @@ export default class ExitUser extends React.Component {
       user.position = '';
       user.agency_employees_id = '';
       this.setState({user});
+
+      //RESET STATUS
+      this.setState({status: ''})
    }
 
 
@@ -61,6 +67,7 @@ export default class ExitUser extends React.Component {
 
       return(
          <div className="edit-user-table">
+            {this.state.status !== '' ? <div className="status">Update Successful</div> : ''}
             <table>
                <thead>
                   <tr>
