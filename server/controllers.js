@@ -138,11 +138,11 @@ module.exports = {
 		)
 	},
 
-	getClientProducts: (req, res) => {
-		const { agencyId } = req.query;
+	getClients: (req, res) => {
+		const {agencyId} = req.query;
 		const db = req.app.get('db');
 
-		db.retrieve_client_products([agencyId]).then(result => res.status(200).send(result))
+		db.retrieve_clients([agencyId]).then(result => res.status(200).send(result));
 	}
 
 }

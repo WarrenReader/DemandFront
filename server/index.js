@@ -114,7 +114,7 @@ app.get('/api/get-product-notes', controllers.getProductNotes)
 app.post('/api/create-note', controllers.createNote)
 app.get('/api/roadmaps', controllers.getRoadmaps)
 app.get('/api/task', controllers.getTask)
-app.get('/api/client-products', controllers.getClientProducts)
+app.get('/api/clients', controllers.getClients)
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));

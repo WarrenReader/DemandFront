@@ -1,0 +1,112 @@
+.existing-clients-table {
+   width: 100%;
+   max-width: 1200px;
+   margin: 0 auto 40px auto;
+   border-radius: 3px;
+   font-size: 1em;
+   overflow-x: scroll;
+}
+
+.existing-clients-table > table {
+   min-width: 765px;
+   width: 100%;
+   height: 275px;
+   display: inline-block;
+   font-size: 0.75em;
+}
+
+.existing-clients-table > table > thead {
+   display: inline;
+}
+
+.existing-clients-table > table > thead > tr {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   font-weight: 600;
+   background: rgb(230, 230, 230);
+   border-bottom: 2px solid rgb(200, 200, 200);
+}
+
+.existing-clients-table > table > thead > tr > th {
+   min-width: 135px;
+   padding: 6px 7px 6px 6px;
+   text-align: left;
+}
+
+.existing-clients-table > table > thead > tr > th:nth-child(4) {
+   min-width: 75px;
+}
+
+.existing-clients-table > table > thead > tr > th:nth-child(5) {
+   min-width: 85px;
+}
+
+.existing-clients-table > table > thead > tr > th:nth-child(6) {
+   min-width: 90px;
+}
+
+.existing-clients-table > table > tbody {
+   height: 244px;
+   display: block;
+   overflow-y: scroll;
+   background: rgb(245, 245, 245);
+}
+
+.existing-clients-table > table > tbody > tr {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+
+.existing-clients-table > table > tbody > tr > td {
+   min-width: 135px;
+   padding: 5px 8px 6px 8px;
+}
+
+.existing-clients-table > table > tbody > tr > td:nth-child(4) {
+   min-width: 75px;
+}
+
+.existing-clients-table > table > tbody > tr > td:nth-child(5) {
+   min-width: 85px;
+}
+
+.existing-clients-table > table > tbody > tr > td:nth-child(6) {
+   min-width: 90px;
+}
+
+.existing-clients-table > table > tbody > tr > td > input {
+   width: 100px;
+   padding: 3px;
+   border: 1px solid #e6ecf0;
+   border-radius: 3px;
+}
+
+.existing-clients-table > table > tbody > tr > td > button.update {
+   padding: 4px 15px;
+   background: rgb(145, 255, 140);
+   border-radius: 3px;
+   border: none;
+   cursor: pointer;
+   outline: none;
+}
+
+.existing-clients-table > table > tbody > tr > td > button.update {
+   padding: 4px 15px;
+   background: rgb(145, 255, 140);
+   border-radius: 3px;
+   border: none;
+   cursor: pointer;
+   outline: none;
+}
+
+.existing-clients-table > table > tbody > tr > td > button.cancel {
+   margin-left: 12px;
+   padding: 4px 15px;
+   background: rgb(206, 206, 206);
+   border-radius: 3px;
+   border: none;
+   cursor: pointer;
+   outline: none;
+}

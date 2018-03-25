@@ -63,7 +63,6 @@ export default class ExitUser extends React.Component {
    render() {
 
       let {username, first_name, last_name, email, agency_employees_id} = this.state.user;
-      console.log(this.state.user)
 
       return(
          <div className="edit-user-table">
