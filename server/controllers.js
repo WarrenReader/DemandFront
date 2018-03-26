@@ -175,7 +175,7 @@ module.exports = {
 		const {id} = req.query;
 		const db = req.app.get('db');
 
-		db.retrieve_client_profile([id]).then(result => 
+		db.retrieve_client_products([id]).then(result => 
 			res.status(200).send(result))
 	}
 

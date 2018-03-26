@@ -1,5 +1,4 @@
 .existing-clients-table {
-   width: 100%;
    max-width: 1200px;
    margin: 0 auto 40px auto;
    border-radius: 3px;
@@ -8,7 +7,6 @@
 }
 
 .existing-clients-table > table {
-   width: 100%;
    min-width: 70px;
    height: 275px;
    display: inline-block;
@@ -121,4 +119,14 @@
    border: none;
    cursor: pointer;
    outline: none;
+}
+
+@media(min-width: 768px) {
+   .existing-clients-table {
+      width: 100%;
+   }
+
+   .existing-clients-table > table {
+      width: 100%;
+   }
 }

@@ -1,17 +1,34 @@
 //MODULES
 import React from 'react';
+import {connect} from 'react-redux';
 
 //CSS, ASSETS
 import './Dashboard.css';
 
-//COMPONENT
-const Dashboard = (props) => {
-	return(
-		<div>
-			Dashboard
-		</div>
-	)
+//COMPONENTS
+import HorizontalLine from '../Assets/HorizontalLine/HorizontalLine.js';
+import Clients from '../Clients/ExistingClients/ExistingClients.js';
 
+//COMPONENT
+class Dashboard extends React.Component {
+
+	render() {
+
+		return(
+			<div className="dashboard-parent">
+				<h1>Clients</h1>
+				<HorizontalLine />
+				<Clients agencyId={1}/>
+
+			</div>
+		)
+	}
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+   return {
+      user: state.user
+   }
+}
+
+export default connect(mapStateToProps)(Dashboard)

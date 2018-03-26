@@ -29,8 +29,8 @@
 
 .products-container-right > .edit-product-status {
    position: absolute;
-   top: 37px;
-   right: 12px;
+   top: 6px;
+   left: 175px;
    color: rgb(28, 180, 23);
    animation: fade 0.75s linear;
 }
@@ -268,6 +268,7 @@
    right: 10px;
    font-size: 0.9em;
    text-decoration: underline;
+   color: blue;
 }
 
 

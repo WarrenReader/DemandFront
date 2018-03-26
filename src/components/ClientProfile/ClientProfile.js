@@ -30,6 +30,9 @@ export default class Profile extends React.Component {
             <h1>Notes</h1>
             <HorizontalLine />
 
+            <h1>Tasks</h1>
+            <HorizontalLine />
+
          </div>
       )
    }

@@ -54,16 +54,10 @@ class Header extends React.Component {
 									</Link>
 								</li>
 								<li onClick={this.handleMobileCollapse}>
-									<Link 
-									onClick={e => {this.setState({view: 'clients'})}} 
-									to='/clients'>Clients
-									</Link>
+									<span className="primary" onClick={e => {this.setState({view: 'clients'})}} >Clients </span>
 								</li>
 								<li onClick={this.handleMobileCollapse}>
-									<Link
-									onClick={e => {this.setState({view: 'agency'})}} 
-									to='/agency'>Agency
-									</Link>
+									<span className="primary" onClick={e => {this.setState({view: 'agency'})}} >Agency</span>
 								</li>
 								<li className="header-link-mobile" onClick={this.handleMobileCollapse}>
 									<Link to='/settings'>Account</Link>
@@ -97,11 +91,6 @@ class Header extends React.Component {
 							&& 
 							<ul>
 								<li>DASHBOARD</li>
-								<li><Link to='/'>Link1</Link></li>
-								<li><Link to='/'>Link2</Link></li>
-								<li><Link to='/'>Link3</Link></li>
-								<li><Link to='/'>Link4</Link></li>
-								<li><Link to='/'>Link5</Link></li>
 							</ul>}
 
 							{view === 'clients'
@@ -116,7 +105,6 @@ class Header extends React.Component {
 							&& 
 							<ul>
 								<li>AGENCY</li>
-								<li><Link to='/'>Metrics</Link></li>
 								<li><Link to='/agency/products'>Products</Link></li>
 								<li><Link to='/agency/tasks'>Tasks</Link></li>
 								<li><Link to='/agency/roadmaps'>Roadmaps</Link></li>

@@ -7,6 +7,9 @@ import Moment from 'react-moment';
 //CSS, ASSETS
 import './Products.css';
 
+//COMPONENTS
+import HorizontalLine from '../Assets/HorizontalLine/HorizontalLine.js';
+
 //COMPONENT
 class Products extends React.Component {
 	constructor(props) {
@@ -165,7 +168,8 @@ class Products extends React.Component {
             <div className="products-parent-container">
 
                <div className="products-container-left">
-                  <h1>Existing Products</h1>
+						<h1>Existing Products</h1>
+						<HorizontalLine />
                   <div className="products-left">
                      
                      <div className="product-list">
@@ -176,6 +180,7 @@ class Products extends React.Component {
 
                   <div className="products-container-right">
 						<h1>Product Details</h1>
+						<HorizontalLine />
 						{editProductStatus === 200 ? <div className="edit-product-status">Update Successful</div> : ''}
                   <div className="products-right">
 

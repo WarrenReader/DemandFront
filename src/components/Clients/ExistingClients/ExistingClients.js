@@ -22,7 +22,6 @@ export default class ExistingClients extends React.Component {
    }
 
    render() {
-
       const {clients} = this.state;
       const clientsResult = clients.map((e, index) => 
          <tr key={index}>

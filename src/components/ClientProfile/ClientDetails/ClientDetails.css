@@ -14,13 +14,13 @@
 }
 
 .client-details span {
-   margin-bottom: 7px;
    display: block;
+   margin-bottom: 3px;
 }
 
 .client-details  span > label {
    float: left;
-   width: 85px;
+   width: 75px;
    margin-top: 6px;
    font-weight: 600;
 }
@@ -34,10 +34,10 @@
 .client-details span > input {
    display: block;
    width: 165px;
-   height: 28px;
+   height: 26px;
    box-sizing: border-box;
    margin-right: 15px;
-   padding: 5px;
+   padding: 4px;
    font-size: 1em;
    border-radius: 3px;
    border: none;
@@ -85,8 +85,8 @@ background: rgb(255, 255, 255);
 /* CLIENT DETAILS UPDATE STATUS */
 .client-details > .update-status {
    position: absolute;
-   top: 169px;
-   left: 195px;
+   top: 76px;
+   left: 220px;
    color: rgb(25, 207, 19);
    font-weight: 600;
    animation: fade 0.75s linear;
@@ -117,12 +117,12 @@ background: rgb(255, 255, 255);
 @media(min-width: 768px) {
    .client-details {
       max-width: 100%;
+      margin: 0;
    }
 
    .client-details > .columns-container {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
    }
 
    .client-details > .columns-container .column-3 > span:nth-child(3) > label {
