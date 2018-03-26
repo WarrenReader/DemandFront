@@ -59,8 +59,7 @@
 
 		render() {
 
-			let {existing_users, editUser, editUserStatus, newUser, 
-				editUserStatusResponse, createUserStatusResponse} = this.state;
+			let {existing_users, editUser, editUserStatusResponse} = this.state;
 
 			return(
 				<div className="users-parent">

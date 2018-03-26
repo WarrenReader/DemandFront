@@ -23,8 +23,6 @@ export default class ExistingClients extends React.Component {
 
    render() {
 
-      console.log(this.state.clients);
-
       const {clients} = this.state;
       const clientsResult = clients.map((e, index) => 
          <tr key={index}>
@@ -33,7 +31,7 @@ export default class ExistingClients extends React.Component {
             <td>{e.product_name}</td>
             <td>{e.price}</td>
             <td><Moment format="MM-DD-YYYY">{e.sign_up_date}</Moment></td>
-            <td><a href={`/#/clients/profile/?id=${e.client_id}`}>View Client</a></td>
+            <td><a href={`/#/clients/profile/?id=${e.clients_id}`}>View Client</a></td>
          </tr>
       )
 

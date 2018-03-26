@@ -143,6 +143,24 @@ module.exports = {
 		const db = req.app.get('db');
 
 		db.retrieve_clients([agencyId]).then(result => res.status(200).send(result));
+	},
+
+	getClientProfile: (req, res) => {
+		const {id} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_client_profile([id]).then(result => 
+			res.status(200).send(result))
+	},
+
+	updateClient: (req, res) => {
+		const {client_name, url, phone, street_address, city, state_province, 
+			zip, country, client_id} = req.body.profile;
+		const db = req.app.get('db');
+
+		db.update_client([client_name, url, phone, street_address, city, 
+			state_province, zip, country, client_id]).then(result =>
+			res.sendStatus(200))
 	}
 
 }

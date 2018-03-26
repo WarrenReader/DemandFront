@@ -115,6 +115,8 @@ app.post('/api/create-note', controllers.createNote)
 app.get('/api/roadmaps', controllers.getRoadmaps)
 app.get('/api/task', controllers.getTask)
 app.get('/api/clients', controllers.getClients)
+app.get('/api/client-profile', controllers.getClientProfile)
+app.put('/api/update-client', controllers.updateClient);
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));

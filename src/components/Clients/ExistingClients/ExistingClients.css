@@ -8,8 +8,8 @@
 }
 
 .existing-clients-table > table {
-   min-width: 765px;
    width: 100%;
+   min-width: 70px;
    height: 275px;
    display: inline-block;
    font-size: 0.75em;
@@ -34,8 +34,12 @@
    text-align: left;
 }
 
+.existing-clients-table > table > thead > tr > th:nth-child(3) {
+   min-width: 100px;
+}
+
 .existing-clients-table > table > thead > tr > th:nth-child(4) {
-   min-width: 75px;
+   min-width: 70px;
 }
 
 .existing-clients-table > table > thead > tr > th:nth-child(5) {
@@ -43,7 +47,7 @@
 }
 
 .existing-clients-table > table > thead > tr > th:nth-child(6) {
-   min-width: 90px;
+   min-width: 85px;
 }
 
 .existing-clients-table > table > tbody {
@@ -64,8 +68,12 @@
    padding: 5px 8px 6px 8px;
 }
 
+.existing-clients-table > table > tbody > tr > td:nth-child(3) {
+   min-width: 100px;
+}
+
 .existing-clients-table > table > tbody > tr > td:nth-child(4) {
-   min-width: 75px;
+   min-width: 70px;
 }
 
 .existing-clients-table > table > tbody > tr > td:nth-child(5) {
@@ -73,7 +81,7 @@
 }
 
 .existing-clients-table > table > tbody > tr > td:nth-child(6) {
-   min-width: 90px;
+   min-width: 85px;
 }
 
 .existing-clients-table > table > tbody > tr > td > input {

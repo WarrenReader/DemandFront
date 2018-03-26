@@ -1,6 +1,5 @@
 //MODULES
 import React from 'react';
-import axios from 'axios';
 
 //CSS, ASSETS
 import './ExistingUsersTable.css';

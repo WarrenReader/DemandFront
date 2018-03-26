@@ -1,0 +1,13 @@
+.client-profile-parent {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   background: white;
+   padding: 35px;
+}
+
+.client-profile-parent > .back{
+   margin-bottom: 20px;
+   font-size: 0.9em;
+   color: rgb(255, 145, 0);
+}
