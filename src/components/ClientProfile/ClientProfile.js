@@ -8,6 +8,7 @@ import './ClientProfile.css';
 import HorizontalLine from '../Assets/HorizontalLine/HorizontalLine.js';
 import ClientDetails from './ClientDetails/ClientDetails.js';
 import ClientProducts from './ClientProducts/ClientProducts.js';
+import ClientNotes from './ClientNotes/ClientNotes.js';
 
 //COMPONENTS
 export default class Profile extends React.Component {
@@ -29,9 +30,7 @@ export default class Profile extends React.Component {
 
             <h1>Notes</h1>
             <HorizontalLine />
-
-            <h1>Tasks</h1>
-            <HorizontalLine />
+            <ClientNotes clientId={this.props.location.search} />
 
          </div>
       )

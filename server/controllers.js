@@ -177,6 +177,14 @@ module.exports = {
 
 		db.retrieve_client_products([id]).then(result => 
 			res.status(200).send(result))
+	},
+
+	getClientNotes: (req, res) => {
+		const {id} = req.query;
+		console.log(id)
+		const db = req.app.get('db');
+
+		db.retrieve_client_notes([id]).then(result => res.status(200).send(result))
 	}
 
 }

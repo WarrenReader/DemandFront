@@ -119,6 +119,7 @@ app.get('/api/clients', controllers.getClients)
 app.get('/api/client-profile', controllers.getClientProfile)
 app.put('/api/update-client', controllers.updateClient)
 app.get('/api/client-products', controllers.getClientProducts)
+app.get('/api/client-notes', controllers.getClientNotes)
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));

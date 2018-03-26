@@ -36,10 +36,13 @@ export default class ExitUser extends React.Component {
       //RESET STATUS
       this.setState({status: ''})
 
-      const user = this.state.user;
+      //UPDATE DATABASE
+      let user = this.state.user;
       axios.put('/api/update-user', {user}).then(result => {
          this.setState({status: result.status})
       })
+      
+      this.props.refresh();
    }
 
 

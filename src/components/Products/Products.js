@@ -262,11 +262,7 @@ class Products extends React.Component {
 									<span>Clients Subscribed</span>
 									<div className="product-client-list">
 
-										<div className="unique-client-row">
-											<span>Client:</span>
-											<span>Product Added:</span>
-											<span>Price:</span>
-										</div>
+										
 
 									</div>
 								</div>

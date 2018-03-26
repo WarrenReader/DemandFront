@@ -37,8 +37,12 @@ export default class CreateUser extends React.Component {
    handleCreateNewUser() {
       const {newUser} = this.state;
       axios.post(`/api/create-user`, newUser).then(result => {
-         this.setState({status: result.status})
+         this.setState({status: result.status});
+      
+         //REFRESH EXISTING USERS TABLE
+         this.props.refresh();
       });
+
    }
 
 

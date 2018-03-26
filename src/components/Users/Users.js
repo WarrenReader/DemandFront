@@ -27,11 +27,14 @@
 					, position: ''
 					, agency_employees_id: ''
 				},
-				deleteStatus: ''
+				deleteStatus: '',
+				index: ''
 			}
 
 			this.handleEditUser = this.handleEditUser.bind(this);
 			this.handleDelete = this.handleDelete.bind(this);
+			this.handleEditRefresh = this.handleEditRefresh.bind(this);
+			this.handleCreateRefresh = this.handleCreateRefresh.bind(this);
 		}
 
 
@@ -44,6 +47,8 @@
 
 
 		handleEditUser(index) {
+			this.setState({index})
+
 			const selectedUser = this.state.existing_users[index];
 			const editUser = this.state.editUser;
 
@@ -75,6 +80,21 @@
 			}
 		}
 
+		handleEditRefresh() {
+			//GET LIST OF EXISTING USERS
+			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
+				this.setState({existing_users: result.data})
+			})
+
+			this.handleEditUser(this.state.index);
+		}
+		
+		handleCreateRefresh() {
+			//GET LIST OF EXISTING USERS
+			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
+				this.setState({existing_users: result.data})
+			})
+		}
 
 		render() {
 
@@ -91,13 +111,13 @@
 					<h1>Edit User</h1>
 					<HorizontalLine />
 					<EditUser
-						user={editUser}
+						user={editUser} refresh={this.handleEditRefresh}
 					/>
 
 
 					<h1>Create User</h1>
 					<HorizontalLine />
-					<CreateUser agenciesId={this.props.user.agencies_id}/>
+					<CreateUser agenciesId={this.props.user.agencies_id} refresh={this.handleCreateRefresh} />
 
 					{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
 					{deleteStatus === 200 ? <div className="delete-user-status">User Deleted</div> : ''}

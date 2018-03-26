@@ -1,0 +1,6 @@
+CREATE TABLE client_notes
+(id SERIAL PRIMARY KEY,
+created_on DATE NOT NULL,
+note VARCHAR(1000) NOT NULL,
+clients_id INTEGER NOT NULL REFERENCES clients(id)
+);
