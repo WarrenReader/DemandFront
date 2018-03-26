@@ -17,7 +17,10 @@ export default class ExistingUsersTable extends React.Component {
             <td>{e.first_name}</td>
             <td>{e.last_name}</td>
             <td>{e.email}</td>
-            <td><button className="edit" onClick={() => this.props.onClick(index)}>Edit</button></td>
+            <td>
+               <button className="edit" onClick={() => this.props.onClick(index)}>Edit</button>
+               <button className="delete" onClick={() => this.props.handleDelete(index)}>Delete</button>
+            </td>
          </tr>
          );			
 

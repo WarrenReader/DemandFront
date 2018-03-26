@@ -26,10 +26,12 @@
 					, phone: ''
 					, position: ''
 					, agency_employees_id: ''
-				}
+				},
+				deleteStatus: ''
 			}
 
 			this.handleEditUser = this.handleEditUser.bind(this);
+			this.handleDelete = this.handleDelete.bind(this);
 		}
 
 
@@ -57,28 +59,48 @@
 		}   
 
 
+		handleDelete(index) {
+			const selectedUser = this.state.existing_users[index];
+			const response = prompt(`Type "DELETE" to delete the user ${selectedUser.username}.`)
+
+			//CHECK IF DELETE WAS ENTERED
+			if(response === 'DELETE') {
+				axios.delete(`/api/delete-user/?agency_employees_id=${selectedUser.agency_employees_id}`).then(result => 
+					this.setState({deleteStatus: result.status}))
+			
+				//UPDATE LIST OF EXISTING USERS
+			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
+				this.setState({existing_users: result.data})
+			})
+			}
+		}
+
+
 		render() {
 
-			let {existing_users, editUser, editUserStatusResponse} = this.state;
+			let {existing_users, editUser, editUserStatusResponse, deleteStatus} = this.state;
 
 			return(
 				<div className="users-parent">
 					<h1>Existing Users</h1>
 					<HorizontalLine />
-					<ExistingUsersTable existingUsers={existing_users} onClick={this.handleEditUser}/>
+					<ExistingUsersTable existingUsers={existing_users} 
+						onClick={this.handleEditUser} handleDelete={this.handleDelete}/>
 
-					
+						
 					<h1>Edit User</h1>
 					<HorizontalLine />
 					<EditUser
 						user={editUser}
 					/>
-					{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
 
 
 					<h1>Create User</h1>
 					<HorizontalLine />
 					<CreateUser agenciesId={this.props.user.agencies_id}/>
+
+					{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
+					{deleteStatus === 200 ? <div className="delete-user-status">User Deleted</div> : ''}
 
 				</div>
 			)

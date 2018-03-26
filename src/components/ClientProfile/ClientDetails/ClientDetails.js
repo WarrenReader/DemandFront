@@ -182,12 +182,12 @@ export default class ClientDetails extends React.Component {
 
             {editStatus === false ?
                <div className="button-container">
-                  <button className='edit' onClick={this.handleEdit}>Edit Details</button>
+                  <a className='edit' onClick={this.handleEdit}>Edit</a>
                </div>
                :
                <div className="button-container">
-                  <button className='cancel' onClick={this.handleCancel}>Cancel</button>
-                  <button className='update' onClick={this.handleUpdate}>Update</button>
+                  <a className='cancel' onClick={this.handleCancel}>Cancel</a>
+                  <a className='update' onClick={this.handleUpdate}>Update</a>
                </div>
                }
 

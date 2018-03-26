@@ -63,6 +63,10 @@
    justify-content: space-around;
 }
 
+.existing-clients-table > table > tbody > tr:nth-child(2n + 2) {
+   background: rgb(230, 230, 230);
+}
+
 .existing-clients-table > table > tbody > tr > td {
    min-width: 135px;
    padding: 5px 8px 6px 8px;

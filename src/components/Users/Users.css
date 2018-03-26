@@ -5,3 +5,13 @@
    padding: 30px;
    position: relative;
 }
+
+/* DELETE SUCCESSFUL */
+.users-parent > .delete-user-status {
+   position: absolute;
+   top: 35px;
+   left: 190px;
+   color: rgb(25, 207, 19);
+   font-weight: 600;
+   animation: fade 0.75s linear;
+}

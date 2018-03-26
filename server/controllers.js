@@ -49,6 +49,14 @@ module.exports = {
 	},
 
 
+	deleteUser: (req, res) => {
+		const {agency_employees_id} = req.query;
+		const db = req.app.get('db');
+		
+		db.delete_user([agency_employees_id]).then(result => res.sendStatus(200))
+	},
+
+
 	getTasks: (req, res) => {
 		const { agency_id } = req.query;
 		const db = req.app.get('db');
@@ -161,6 +169,14 @@ module.exports = {
 		db.update_client([client_name, url, phone, street_address, city, 
 			state_province, zip, country, client_id]).then(result =>
 			res.sendStatus(200))
+	},
+
+	getClientProducts: (req, res) => {
+		const {id} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_client_profile([id]).then(result => 
+			res.status(200).send(result))
 	}
 
 }

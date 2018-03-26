@@ -104,6 +104,7 @@ app.get('/auth/me', (req, res) => {
 //APPLICATION ENDPOINTS
 app.post('/api/create-user', controllers.createUser)
 app.get('/api/get-users', controllers.getUsers)
+app.delete('/api/delete-user', controllers.deleteUser)
 app.put('/api/update-user', controllers.updateUser)
 app.get('/api/tasks', controllers.getTasks)
 app.put('/api/update-task', controllers.updateTask)
@@ -116,7 +117,8 @@ app.get('/api/roadmaps', controllers.getRoadmaps)
 app.get('/api/task', controllers.getTask)
 app.get('/api/clients', controllers.getClients)
 app.get('/api/client-profile', controllers.getClientProfile)
-app.put('/api/update-client', controllers.updateClient);
+app.put('/api/update-client', controllers.updateClient)
+app.get('/api/client-products', controllers.getClientProducts)
 
 //SERVER LISTENING
 app.listen(SESSION_PORT, () => console.log(`Listening on ${SESSION_PORT}`));
