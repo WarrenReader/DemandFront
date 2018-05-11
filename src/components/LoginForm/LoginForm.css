@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
   background-color: white;
@@ -12,7 +12,7 @@
 
 .logo-container {
   display: flex;
-  margin-bottom: 100px;
+  margin-bottom: 35px;
 }
 
 .logo-container > h1 {
@@ -34,6 +34,7 @@
 
 .login-field-container {
   width: 85%;
+  max-width: 500px;
   margin-bottom: 15px;
 }
 
@@ -55,20 +56,47 @@
   border: none;
   border-radius: 3px;
   padding-left:10px;
+  outline: none;
 }
 
 .login-button {
   height: 50px;
-  width: 90%;
+  width: 87.5%;
+  max-width: 510px;
   background: #0070bc;
   border-radius: 5px;
   border: none;
   margin-top: 20px;
   color:rgba(230, 230, 230);
-  font-size: 1.3em;
+  font-size: 1.2em;
   cursor: pointer;
+  outline: none;
 }
 
+@media(min-width: 769px) {
+  .login-container {
+    width: 475px;
+    min-height: 370px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px 2px rgb(0,0,0, 0.3);
+  }
+
+  .login-field-container > span {
+    font-size: 0.8em;
+  }
+
+  .login-field {
+    height: 35px;
+    font-size: 1.3em;
+  }
+
+  .login-button {
+    height: 37px;
+    margin-top: 10px;
+    font-size: 1.05em;
+  }
+
+}
 
 
 
@@ -92,11 +120,3 @@
    100% { opacity: 1; }
  }
  */
-
-
-
-
-
-
-
-
