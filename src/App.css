@@ -2,20 +2,3 @@
   min-height: 100%;
   background: rgb(236, 236, 236);
 }
-
-.main-body {
-  position: absolute;
-  left: 0;
-  right: 0;
-  max-width: 1350px;
-  min-height: calc(100% - 95px);
-  margin: auto;
-  padding-top: 95px;
-  background: rgb(255, 255, 255);
-}
-
-
-/* GLOBAL CSS */
-.raleway {
-  font-family: 'Raleway', sans-serif;
-}

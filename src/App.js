@@ -15,9 +15,7 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <Header />
-        <div className="main-body">
           {routes}
-        </div>
       </div>
     );
   }
