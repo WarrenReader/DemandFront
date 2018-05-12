@@ -6,6 +6,8 @@ import {connect} from 'react-redux';
 //CSS, ASSETS
 import './LoginForm.css';
 import logo from './logo.png';
+import eyeOn from './eye-on.svg';
+import eyeOff from './eye-off.svg';
 import {getUser} from '../../redux/reducer.js';
 
 //COMPONENT
@@ -15,9 +17,11 @@ class Login extends React.Component {
       this.state = {
          username: '',
          password: '',
-         status: ''
+         status: '',
+         passwordVisible: 'false'
       }
       this.handleLogin = this.handleLogin.bind(this);
+      this.passwordVisibility = this.passwordVisibility.bind(this);
    }
 
    componentWillUnmount() {
@@ -65,16 +69,28 @@ class Login extends React.Component {
     }
   }
 
+  passwordVisibility() {
+    let update = !this.state.passwordVisible;
+    this.setState({passwordVisible: update});
+    
+    //Update Password Visibility
+    if(update) {
+      document.getElementById('password').setAttribute('type', 'password')
+    } else {
+      document.getElementById('password').setAttribute('type', 'text')
+    }
+  }  
+
   render() {
 
-    let {username, password, status} = this.state;
+    let {username, password, status, passwordVisible} = this.state;
 
     return (
       <div className="login-container">
 
         <div className="logo-container">
           <h1>WhiteLabel</h1>
-          <img src={logo} alt="Logo"/>
+          <img src={logo} alt="Tesseract"/>
         </div>
       
         <div className="login-status-div">{status && <div className='login-status'>{status}</div>}</div>
@@ -100,6 +116,13 @@ class Login extends React.Component {
                 value={password}
                 onChange={e => this.setState({password: e.target.value})}
               />
+              <img
+                className='eye'
+                src={passwordVisible ? eyeOn : eyeOff}
+                onClick={this.passwordVisibility}
+                title={passwordVisible ? 'Show Password' : 'Hide Password'}
+                alt={passwordVisible ? 'Show Password' : 'Hide Password'}
+                />
           </div>
 
           <button className="login-button">Log In</button>

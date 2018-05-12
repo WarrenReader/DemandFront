@@ -33,6 +33,7 @@
 }
 
 .login-field-container {
+  position: relative;
   width: 85%;
   max-width: 500px;
   margin: 0 0 15px 10px;
@@ -76,6 +77,15 @@
 
 .login-button:active {
   opacity: 0.7;
+}
+
+.eye {
+  position: absolute;
+  top: 28px;
+  right: 20px;
+  width: 24px;
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 /* Login Status */
@@ -122,5 +132,9 @@
     height: 40px;
     margin-top: 12px;
     font-size: 1.1em;
+  }
+
+  .eye {
+    top: 25px;
   }
 }

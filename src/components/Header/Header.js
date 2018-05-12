@@ -35,7 +35,8 @@ class Header extends React.Component {
    render() {
 
 		const {first_name = '', last_name = ''} = this.props.user;
-		const {view} = this.state;
+    const {view} = this.state;
+    console.log(this.props.user)
 		
 		return (
 			<div className="header-container">
