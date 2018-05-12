@@ -5,7 +5,7 @@
   height: 100vh;
   min-height: 500px;
   width: 100%;
-  background: linear-gradient(25deg, #393d41, #2c83e6);
+  background: #0070bc;
 }
 
 @media(max-width: 769px) {

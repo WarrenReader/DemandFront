@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 //CSS, ASSETS
 import './LoginForm.css';
 import logo from './logo.png';
-import {hideHeader, showHeader, getUser} from '../../redux/reducer.js';
+import {getUser} from '../../redux/reducer.js';
 
 //COMPONENT
 class Login extends React.Component {
@@ -20,79 +20,99 @@ class Login extends React.Component {
       this.handleLogin = this.handleLogin.bind(this);
    }
 
-   componentWillMount() {
-      this.props.hideHeader();
-   }
-
    componentWillUnmount() {
-      this.props.showHeader();
-      this.props.getUser();
+    this.props.getUser();
    }
-
 
    handleLogin(e) {
-      e.preventDefault();
-      let {username, password} = this.state;
-      username = username.toLowerCase();
+    e.preventDefault();
+    let {username, password} = this.state;
+    username = username.toLowerCase();
+    let usernameField = document.querySelector('#username');
+    let passwordField = document.querySelector('#password');
 
+    //Reset Status And Warnings
+    this.setState({status: ''});
+    usernameField.classList.remove('warn');
+    usernameField.removeAttribute('placeholder');
+    passwordField.classList.remove('warn');
+    passwordField.removeAttribute('placeholder');
+
+    //Validation
+    let flag = true;
+    if(!username) {
+      flag = false;
+      usernameField.classList.add('warn');
+      usernameField.setAttribute('placeholder','Username Required')
+    }
+
+    if(!password) {
+      flag = false;
+      passwordField.classList.add('warn');
+      passwordField.setAttribute('placeholder','Password Required')
+    }
+
+    //Check Authorization
+    if(flag) {
       axios.post('/api/login', {username, password}).then(res => {
-         if(res.data === 'Unauthorized') {
+        if(res.data === 'Unauthorized') {
             this.setState({
-               status: res.data
+              status: res.data
             })
-         }
-         this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
-      })  
-   }
+        }
+        this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
+      })
+    }
+  }
 
+  render() {
 
-   render() {
+    let {username, password, status} = this.state;
 
-      let {username, password, status} = this.state;
+    return (
+      <div className="login-container">
 
-      return (
-        <div className="login-container">
-
-          <div className="logo-container">
-            <h1>WhiteLabel</h1>
-            <img src={logo} alt="Logo"/>
-          </div>
-        
-          <form className="login-fields-container" onSubmit={this.handleLogin}>
-              
-              <div className="login-field-container">
-                  <span>Username</span>
-                  <input 
-                    type="text"
-                    className="login-field"
-                    value={username}
-                    onChange={e => this.setState({username: e.target.value})}
-                  />
-              </div>
-
-              <div className="login-field-container">
-                  <span>Password</span>
-                  <input
-                    type="password"
-                    className="login-field"
-                    value={password}
-                    onChange={e => this.setState({password: e.target.value})}
-                  />
-              </div>
-
-              <button className="login-button">Login</button>
-              
-            </form>
+        <div className="logo-container">
+          <h1>WhiteLabel</h1>
+          <img src={logo} alt="Logo"/>
         </div>
-      )
-   }
+      
+        <div className="login-status-div">{status && <div className='login-status'>{status}</div>}</div>
+
+        <form className="login-fields-container" onSubmit={this.handleLogin}>
+          <div className="login-field-container">
+              <span>Username</span>
+              <input 
+                type="text"
+                id="username"
+                className="login-field"
+                value={username}
+                onChange={e => this.setState({username: e.target.value})}
+              />
+          </div>
+
+          <div className="login-field-container">
+              <span>Password</span>
+              <input
+                type="password"
+                id="password"
+                className="login-field"
+                value={password}
+                onChange={e => this.setState({password: e.target.value})}
+              />
+          </div>
+
+          <button className="login-button">Log In</button>
+            
+        </form>
+      </div>
+    )
+  }
 }
 
 
 function mapStateToProps(state) {
-   return {
-      headerVisibility: state.headerVisibility
-   }
+   return {}
 }
 
-export default connect(mapStateToProps, {hideHeader, showHeader, getUser})(Login)
+export default connect(mapStateToProps, {getUser})(Login)

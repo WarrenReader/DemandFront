@@ -10,13 +10,12 @@ import Header from '../src/components/Header/Header.js';
 
 //COMPONENT
 export default class App extends React.Component {
-
   render() {
     return (
       <div className="app">
-        <Header />
+        {document.location.hash === '#/' ? null : <Header />}
           {routes}
       </div>
-    );
+    )
   }
 }

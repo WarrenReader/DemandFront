@@ -35,12 +35,10 @@ class Header extends React.Component {
    render() {
 
 		const {first_name = '', last_name = ''} = this.props.user;
-		const {headerVisibility} = this.props;
 		const {view} = this.state;
 		
 		return (
 			<div className="header-container">
-				{ headerVisibility &&
 					<div>
 						<header className="header">
 							<img src={logo} alt="logo" className="header-logo" />
@@ -112,7 +110,6 @@ class Header extends React.Component {
 							</ul>}
 						</div>
 					</div>
-					}
 				</div>
       )
    }
@@ -121,7 +118,6 @@ class Header extends React.Component {
 function mapStateToProps(state) {
    return {
       user: state.user
-      , headerVisibility: state.headerVisibility
    }
 }
 

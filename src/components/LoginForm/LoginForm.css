@@ -12,11 +12,11 @@
 
 .logo-container {
   display: flex;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 .logo-container > h1 {
-  font-size: 2.4em;
+  font-size: 2.5em;
   margin-right: 15px;
   margin-top: 5px;
 }
@@ -35,11 +35,11 @@
 .login-field-container {
   width: 85%;
   max-width: 500px;
-  margin-bottom: 15px;
+  margin: 0 0 15px 10px;
 }
 
 .login-field-container > span {
-  font-size: 0.9em;
+  font-size: 0.95em;
   font-weight: 500;
   letter-spacing: 0.5px;
 }
@@ -57,50 +57,28 @@
   border-radius: 3px;
   padding-left:10px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .login-button {
   height: 50px;
-  width: 87.5%;
+  width: 85%;
   max-width: 510px;
   background: #0070bc;
   border-radius: 5px;
   border: none;
   margin-top: 20px;
-  color:rgba(230, 230, 230);
+  color:rgba(245, 245, 245);
   font-size: 1.2em;
   cursor: pointer;
   outline: none;
 }
 
-@media(min-width: 769px) {
-  .login-container {
-    width: 475px;
-    min-height: 370px;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px 2px rgb(0,0,0, 0.3);
-  }
-
-  .login-field-container > span {
-    font-size: 0.8em;
-  }
-
-  .login-field {
-    height: 35px;
-    font-size: 1.3em;
-  }
-
-  .login-button {
-    height: 37px;
-    margin-top: 10px;
-    font-size: 1.05em;
-  }
-
+.login-button:active {
+  opacity: 0.7;
 }
 
-
-
-/* 
+/* Login Status */
 .login-status-div {
   width: 100%;
   height: 20px;
@@ -110,7 +88,7 @@
 }
 
 .login-status {
-   color: rgb(202, 202, 37);
+   color: rgb(255, 50, 50);
    padding-bottom: 10px;
    opacity: 1;
    animation: fade 0.75s linear;
@@ -119,4 +97,30 @@
    0%,100% { opacity: 0; }
    100% { opacity: 1; }
  }
- */
+
+ .warn {
+   border: 1px solid red;
+ }
+
+
+/* Media Query */
+@media(min-width: 769px) {
+  .login-container {
+    width: 500px;
+    min-height: 370px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px 2px rgb(0,0,0, 0.2);
+  }
+
+  .login-field {
+    height: 35px;
+    font-size: 1.3em;
+    font-weight: 300;
+  }
+
+  .login-button {
+    height: 40px;
+    margin-top: 12px;
+    font-size: 1.1em;
+  }
+}

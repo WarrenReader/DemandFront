@@ -7,10 +7,10 @@ import './Login.css'
 //Components
 import LoginForm from '../../components/LoginForm/LoginForm.js'
 
-export default function() {
+export default function(props) {
   return (
     <div className="login-page">
-      <LoginForm />
+      <LoginForm history={props.history}/>
     </div>
   )
 }
