@@ -5,7 +5,6 @@ import store from './redux/store.js';
 import './reset.css';
 import './index.css';
 import App from './App';
-import {unregister} from './registerServiceWorker';
 import {HashRouter} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -19,5 +18,3 @@ ReactDOM.render(
       </Provider>
    </HashRouter>
    , document.getElementById('root'));
-   
-unregister();

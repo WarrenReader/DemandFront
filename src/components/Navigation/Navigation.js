@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 //CSS, ASSETS
-import './Header.css';
+import './Navigation.css';
 import logo from './logo.png';
 
 //COMPONENT
@@ -36,10 +36,9 @@ class Header extends React.Component {
 
 		const {first_name = '', last_name = ''} = this.props.user;
     const {view} = this.state;
-    console.log(this.props.user)
 		
 		return (
-			<div className="header-container">
+			<div className="header-container" style={this.props.user.user_id ? null : {'display': 'none'}}>
 					<div>
 						<header className="header">
 							<img src={logo} alt="logo" className="header-logo" />

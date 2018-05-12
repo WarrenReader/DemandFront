@@ -4,6 +4,9 @@ import {Switch, Route} from 'react-router-dom';
 
 //COMPONENTS
 import Login from '../views/Login/Login.js';
+import _404 from '../views/404/404.js';
+
+
 import Dashboard from '../components/Dashboard/Dashboard.js';
 import Clients from '../components/Clients/Clients.js';
 import Agency from '../components/Agency/Agency.js';
@@ -26,5 +29,6 @@ export default (
       <Route path='/agency/tasks' component={Tasks} />
       <Route path='/agency/roadmaps' component={Roadmaps} />
       <Route path='/clients/profile' component={ClientProfile} />
+      <Route component={_404}/>
    </Switch>
 )

@@ -6,15 +6,17 @@ import './App.css';
 
 //COMPONENTS
 import routes from './routes/routes.js';
-import Header from '../src/components/Header/Header.js';
+import Navigation from '../src/components/Navigation/Navigation.js';
 
 //COMPONENT
 export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        {document.location.hash === '#/' ? null : <Header />}
+        {document.location.hash === '#/' ? null : <Navigation />}
+          <div className={document.location.hash === '#/' ? null : 'main'}>
           {routes}
+          </div>
       </div>
     )
   }
