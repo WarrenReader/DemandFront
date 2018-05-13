@@ -63,8 +63,10 @@ class Login extends React.Component {
             this.setState({
               status: res.data
             })
+        } else {
+          this.props.loginStatus();
+          // this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
         }
-        this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
       })
     }
   }

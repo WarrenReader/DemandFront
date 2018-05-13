@@ -1,0 +1,17 @@
+.loading-container {
+  position: relative;
+}
+
+.loading-text {
+  position: absolute;
+  right: 32px;
+  top: 75px;
+  font-size: 1.4em;
+  color: #0070bc;
+}
+
+@media(min-width: 769px) {
+  .loading-text {
+    color: white;
+  }
+}
