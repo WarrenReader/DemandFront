@@ -5,6 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 //COMPONENTS
 import Login from '../views/Login/Login.js';
 import _404 from '../views/404/404.js';
+import Navigation from '../components/Navigation/Navigation.js';
 
 
 import Dashboard from '../components/Dashboard/Dashboard.js';

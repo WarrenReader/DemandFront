@@ -1,12 +1,20 @@
 //Modules
 import React from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
+import {connect} from 'react-redux';
 
-//CSS
+//CSS, Redux Functions
 import './Loading.css';
+import {getUser} from '../../redux/reducer.js';
 
 //Component
-export default class Loading extends React.Component {
+class Loading extends React.Component {
+
+  componentDidMount() {
+    this.props.getUser();
+    setTimeout(() => this.props.history.push('/dashboard'), 2000)
+  }
+
   render() {
     return (
       <div className="loading-container">
@@ -16,3 +24,9 @@ export default class Loading extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps, {getUser})(Loading)

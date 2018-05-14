@@ -29,9 +29,9 @@ export default class LoginView extends React.Component {
       <div className="login-page">
         {loginStatus === false 
           ? 
-          <LoginForm history={this.props.history} loginStatus={this.checkLogin}/> 
+          <LoginForm loginStatus={this.checkLogin} /> 
           : 
-          <Loading />}
+          <Loading history={this.props.history} />}
       </div>
     )
   }

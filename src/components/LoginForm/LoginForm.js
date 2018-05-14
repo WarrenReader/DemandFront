@@ -1,17 +1,15 @@
 //MODULES
 import React from 'react';
 import axios from 'axios';
-import {connect} from 'react-redux';
 
 //CSS, ASSETS
 import './LoginForm.css';
-import logo from './logo.png';
-import eyeOn from './eye-on.svg';
-import eyeOff from './eye-off.svg';
-import {getUser} from '../../redux/reducer.js';
+import logo from './assets/logo.png';
+import eyeOn from './assets/eye-on.svg';
+import eyeOff from './assets/eye-off.svg';
 
 //COMPONENT
-class Login extends React.Component {
+export default class Login extends React.Component {
    constructor() {
       super()
       this.state = {
@@ -22,10 +20,6 @@ class Login extends React.Component {
       }
       this.handleLogin = this.handleLogin.bind(this);
       this.passwordVisibility = this.passwordVisibility.bind(this);
-   }
-
-   componentWillUnmount() {
-    this.props.getUser();
    }
 
    handleLogin(e) {
@@ -65,7 +59,6 @@ class Login extends React.Component {
             })
         } else {
           this.props.loginStatus();
-          // this.props.history.push(res.headers.location) //REDIRECT IF LOGIN SUCCESS
         }
       })
     }
@@ -134,10 +127,3 @@ class Login extends React.Component {
     )
   }
 }
-
-
-function mapStateToProps(state) {
-   return {}
-}
-
-export default connect(mapStateToProps, {getUser})(Login)
