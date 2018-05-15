@@ -4,5 +4,11 @@
 }
 
 .main {
-  padding-top: 95px;
+  padding: 125px 30px;
+}
+
+@media(min-width: 1024px) {
+  .main{
+    padding: 125px 60px;
+  }
 }

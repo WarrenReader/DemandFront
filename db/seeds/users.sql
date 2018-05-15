@@ -2,5 +2,9 @@ CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 username VARCHAR(30) NOT NULL UNIQUE,
 password VARCHAR(100) NOT NULL,
-agency_employees_id INTEGER NOT NULL REFERENCES agency_employees(id)
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+email VARCHAR(75) NOT NULL UNIQUE,
+position VARCHAR(50),
+agency_id INTEGER NOT NULL REFERENCES agencies(id)
 );

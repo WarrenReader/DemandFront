@@ -5,15 +5,14 @@ import {Switch, Route} from 'react-router-dom';
 //COMPONENTS
 import Login from '../views/Login/Login.js';
 import _404 from '../views/404/404.js';
-import Navigation from '../components/Navigation/Navigation.js';
+import Dashboard from '../views/Dashboard/Dashboard.js';
+import Settings from '../components/AccountDetails/AccountDetails.js';
 
 
-import Dashboard from '../components/Dashboard/Dashboard.js';
 import Clients from '../components/Clients/Clients.js';
 import Agency from '../components/Agency/Agency.js';
 import Products from '../components/Products/Products.js';
 import Users from '../components/Users/Users.js';
-import Settings from '../components/Settings/Settings.js';
 import Tasks from '../components/Tasks/Tasks.js';
 import Roadmaps from '../components/Roadmaps/Roadmaps.js';
 import ClientProfile from '../components/ClientProfile/ClientProfile.js';

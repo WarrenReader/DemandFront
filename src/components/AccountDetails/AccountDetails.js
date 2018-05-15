@@ -4,7 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 
 //CSS, ASSETS
-import './Settings.css';
+import './AccountDetails.css';
 import {getUser} from '../../redux/reducer.js';
 
 //COMPONENTS
@@ -13,7 +13,7 @@ import InputRow from '../Assets/InputRow/InputRow.js';
 import SaveButton from '../Assets/SaveButton/SaveButton.js';
 
 //COMPONENT
-class Settings extends React.Component {
+class AccountDetails extends React.Component {
    constructor() {
       super()
       this.state = {
@@ -21,47 +21,34 @@ class Settings extends React.Component {
 			, first_name: '' //USER INFO STARTS HERE
 			, last_name: ''
 			, email: ''
-			, phone: ''
 			, position: ''
 			, user_id: '' 
-			, agency_employees_id: ''
-			, username: ''
 		}
 
 		this.handleSaveButton = this.handleSaveButton.bind(this);
    }
 
-
 	componentWillMount() {
-		axios.get('/auth/me').then(res => {
-			this.setState({
-				first_name: res.data.first_name,
-				last_name: res.data.last_name,
-				email: res.data.email,
-				phone: res.data.phone,
-				position: res.data.position,
-				user_id: res.data.user_id,
-				agency_employees_id: res.data.agency_employees_id,
-				username: res.data.username
-			})
-		})
-	}
-
+    this.setState({
+      first_name: this.props.user.first_name
+      , last_name: this.props.user.last_name
+      , email: this.props.user.email
+      , position: this.props.user.position
+      , user_id: this.props.user.user_id
+    })
+  }
 
    handleSaveButton() {
-		//RESETS 'UPDATE SUCCESSFUL' MESSAGE
+		//Resets 'Update Successful' Message
 		this.setState({status: ''})
 
-		//UPDATE USER SETTINGS TO DATABASE AND RETIEVE UPDATED USER PROFILE
+		//Add User Details To State From Redux
 		const user = {
 			first_name: this.state.first_name
 			, last_name: this.state.last_name
 			, email: this.state.email
-			, phone: this.state.phone
 			, position: this.state.position
 			, user_id: this.state.user_id
-			, agency_employees_id: this.state.agency_employees_id
-			, username: this.state.username
 		};
 		
 		axios.put('/api/update-user', {user}).then(result => {
@@ -74,7 +61,7 @@ class Settings extends React.Component {
 
    render() {
 
-      const {first_name, last_name, email, phone, position, status} = this.state;
+      const {first_name, last_name, email, position, status} = this.state;
 
       return(
 			<div className="account-parent">
@@ -102,12 +89,6 @@ class Settings extends React.Component {
 					/>
 
 					<InputRow 
-						name="Phone"
-						value={phone}
-						onChange={e => this.setState({phone: e.target.value})}
-					/>
-
-					<InputRow 
 						name="Position"
 						value={position}
 						onChange={e => this.setState({position: e.target.value})}
@@ -126,7 +107,8 @@ class Settings extends React.Component {
 
 function mapStateToProps(state) {
    return {
+     user: state.user
    }
 }
 
-export default connect(mapStateToProps, {getUser})(Settings)
+export default connect(mapStateToProps, {getUser})(AccountDetails)
