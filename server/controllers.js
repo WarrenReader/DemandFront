@@ -170,8 +170,6 @@ module.exports = {
 		)
 	},
 
-
-
 	getClientProfile: (req, res) => {
 		const {id} = req.query;
 		const db = req.app.get('db');

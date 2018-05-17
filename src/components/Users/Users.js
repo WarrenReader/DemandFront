@@ -10,7 +10,7 @@
 	import HorizontalLine from '../Assets/HorizontalLine/HorizontalLine.js';
 	import ExistingUsersTable from './ExistingUsersTable/ExistingUsersTable.js';
 	import EditUser from './EditUser/EditUser.js';
-	import CreateUser from './CreateUser/CreateUser.js';
+	// import CreateUser from './CreateUser/CreateUser.js';
 
 	//COMPONENT
 	class Users extends React.Component {
