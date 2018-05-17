@@ -1,17 +1,18 @@
 //MODULES
 import React from 'react';
+import {connect} from 'react-redux';
 
 //CSS, ASSETS
 import './ExistingUsersTable.css';
 
 //COMPONENT
-export default class ExistingUsersTable extends React.Component {
+class ExistingUsersTable extends React.Component {
 
    render() {
 
-      const {existingUsers = []} = this.props;
+      const {users} = this.props;
 
-      const existingUsersData = existingUsers.map((e, index) =>
+      const existingUsersData = users.map((e, index) =>
          <tr key={index}>
             <td>{e.username}</td>
             <td>{e.first_name}</td>
@@ -47,3 +48,11 @@ export default class ExistingUsersTable extends React.Component {
       )
    }
 }
+
+function mapStateToProps(state) {
+  return {
+    users: state.users
+  }
+}
+
+export default connect(mapStateToProps)(ExistingUsersTable)

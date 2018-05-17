@@ -38,12 +38,6 @@ class Products extends React.Component {
 	}
 
 
-	componentWillMount() {
-		axios.get(`/api/products/?agencyId=${this.props.user.agencies_id}`).then(res => 
-			this.setState({products: res.data})
-	)}
-
-
 	handleEditProduct(index) {
 		const {products} = this.state;
 		const selectedProduct = products[index];
@@ -145,7 +139,8 @@ class Products extends React.Component {
 
 
    render() {
-		const {edit, products, product, productNotes, editProductStatus} = this.state;
+    const {edit, product, productNotes, editProductStatus} = this.state;
+    const {products} = this.props;
 		const existingProducts = products.map((e, index) => 
 			<div key={e.name} className="unique-product">
 				<span>Name: <span>{e.name}</span></span>
@@ -162,8 +157,7 @@ class Products extends React.Component {
 				<span>Note: <span className="note">{e.note}</span></span>
 			</div>
 		);
-		
-
+    
       return(
             <div className="products-parent-container">
 
@@ -293,7 +287,7 @@ class Products extends React.Component {
 
 function mapStateToProps(state) {
 	return{
-		user: state.user
+		products: state.products
 	}
 }
 

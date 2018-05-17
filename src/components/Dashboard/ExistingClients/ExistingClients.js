@@ -1,6 +1,5 @@
 //COMPONENTS
 import React from 'react';
-import axios from 'axios';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import {getClients} from '../../../redux/reducer.js';

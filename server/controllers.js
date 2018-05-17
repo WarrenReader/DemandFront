@@ -4,6 +4,42 @@ const bcrypt = require('bcryptjs');
 //ENDPOINT FUNCTIONS
 module.exports = {
 
+  getClients: (req, res) => {
+		const {agencyId} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_clients([agencyId]).then(result => res.status(200).send(result));
+	},
+
+	getUsers: (req, res) => {
+    const {agencyId} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_agency_users([agencyId]).then(result => {
+			res.status(200).send(result);
+		})
+	},
+
+  getProducts: (req, res) => {
+		const {agencyId} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_products_by_agency([agencyId]).then(result => res.status(200).send(result))
+	},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	createUser: (req, res) => {
 		const {first_name, last_name, email, phone, position, agencies_id, username, password} = req.body;
 		const db = req.app.get('db');
@@ -24,14 +60,7 @@ module.exports = {
 		})
 	},
 
-	getUsers: (req, res) => {
-		const { agencyId } = req.query;
-		const db = req.app.get('db');
 
-		db.retrieve_agency_users([agencyId]).then(result => {
-			res.status(200).send(result);
-		})
-	},
 
 	updateUser: (req, res) => {
 		const {user} = req.body;
@@ -102,13 +131,6 @@ module.exports = {
 			, last_update_agency_employees_id]).then(result => res.sendStatus(200));
 	},
 
-	getProducts: (req, res) => {
-		const { agencyId } = req.query;
-		const db = req.app.get('db');
-
-		db.retrieve_products_by_agency([agencyId]).then(result => res.status(200).send(result))
-	},
-
 	updateProduct: (req, res) => {
 		const { name, price, products_id } = req.body;
 		const db = req.app.get('db');
@@ -146,12 +168,7 @@ module.exports = {
 		)
 	},
 
-	getClients: (req, res) => {
-		const {agencyId} = req.query;
-		const db = req.app.get('db');
 
-		db.retrieve_clients([agencyId]).then(result => res.status(200).send(result));
-	},
 
 	getClientProfile: (req, res) => {
 		const {id} = req.query;

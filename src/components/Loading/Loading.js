@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 //CSS, Redux Functions
 import './Loading.css';
-import {getUser, getClients} from '../../redux/reducer.js';
+import {getUser, getClients, getUsers, getProducts} from '../../redux/reducer.js';
 
 //Component
 class Loading extends React.Component {
@@ -13,6 +13,8 @@ class Loading extends React.Component {
   componentDidMount() {
     this.props.getUser().then(() => {
       this.props.getClients(this.props.user.agency_id);
+      this.props.getUsers(this.props.user.agency_id);
+      this.props.getProducts(this.props.user.agency_id);
     });
 
     setTimeout(() => this.props.history.push('/dashboard'), 2000)
@@ -32,8 +34,7 @@ class Loading extends React.Component {
 function mapStateToProps(state) {
   return {
     user: state.user
-    , clients: state.clients
   }
 }
 
-export default connect(mapStateToProps, {getUser, getClients})(Loading)
+export default connect(mapStateToProps, {getUser, getClients, getUsers, getProducts})(Loading)

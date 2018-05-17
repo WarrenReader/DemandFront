@@ -37,15 +37,6 @@
 			this.handleCreateRefresh = this.handleCreateRefresh.bind(this);
 		}
 
-
-		componentDidMount() {
-			//GET LIST OF EXISTING USERS
-			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
-				this.setState({existing_users: result.data})
-			})
-		}
-
-
 		handleEditUser(index) {
 			this.setState({index})
 
@@ -74,30 +65,29 @@
 					this.setState({deleteStatus: result.status}))
 			
 				//UPDATE LIST OF EXISTING USERS
-			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
-				this.setState({existing_users: result.data})
-			})
+			// axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
+			// 	this.setState({existing_users: result.data})
+			// })
 			}
 		}
 
 		handleEditRefresh() {
 			//GET LIST OF EXISTING USERS
-			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
-				this.setState({existing_users: result.data})
-			})
+			// axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
+			// 	this.setState({existing_users: result.data})
+			// })
 
 			this.handleEditUser(this.state.index);
 		}
 		
 		handleCreateRefresh() {
 			//GET LIST OF EXISTING USERS
-			axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
-				this.setState({existing_users: result.data})
-			})
+			// axios.get(`/api/get-users?agencyId=${this.props.user.agency_employees_id}`).then(result => {
+			// 	this.setState({existing_users: result.data})
+			// })
 		}
 
 		render() {
-
 			let {existing_users, editUser, editUserStatusResponse, deleteStatus} = this.state;
 
 			return(
@@ -117,7 +107,7 @@
 
 					<h1>Create User</h1>
 					<HorizontalLine />
-					<CreateUser agenciesId={this.props.user.agencies_id} refresh={this.handleCreateRefresh} />
+					{/*<CreateUser agenciesId={this.props.user.agencies_id} refresh={this.handleCreateRefresh} />*/}
 
 					{editUserStatusResponse === 200 ? <div className="edit-user-status">Update Successful</div> : ''}
 					{deleteStatus === 200 ? <div className="delete-user-status">User Deleted</div> : ''}
@@ -127,12 +117,10 @@
 		}
 	}
 
-
 	function mapStateToProps(state) {
 		return {
-			user: state.user
+			users: state.users
 		}
 	}
-
 
 	export default connect(mapStateToProps)(Users)
