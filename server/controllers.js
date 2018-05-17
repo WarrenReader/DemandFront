@@ -181,7 +181,6 @@ module.exports = {
 
 	getClientNotes: (req, res) => {
 		const {id} = req.query;
-		console.log(id)
 		const db = req.app.get('db');
 
 		db.retrieve_client_notes([id]).then(result => res.status(200).send(result))

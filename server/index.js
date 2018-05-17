@@ -102,6 +102,11 @@ app.get('/auth/me', (req, res) => {
 })
 
 //APPLICATION ENDPOINTS
+app.get('/api/clients', controllers.getClients)
+
+
+
+
 app.post('/api/create-user', controllers.createUser)
 app.get('/api/get-users', controllers.getUsers)
 app.delete('/api/delete-user', controllers.deleteUser)
@@ -115,7 +120,6 @@ app.get('/api/get-product-notes', controllers.getProductNotes)
 app.post('/api/create-note', controllers.createNote)
 app.get('/api/roadmaps', controllers.getRoadmaps)
 app.get('/api/task', controllers.getTask)
-app.get('/api/clients', controllers.getClients)
 app.get('/api/client-profile', controllers.getClientProfile)
 app.put('/api/update-client', controllers.updateClient)
 app.get('/api/client-products', controllers.getClientProducts)

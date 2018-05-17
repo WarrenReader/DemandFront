@@ -7,7 +7,7 @@ import './Clients.css';
 
 //COMPONENTS
 import HorizontalLine from '../Assets/HorizontalLine/HorizontalLine.js';
-import ExistingClients from './ExistingClients/ExistingClients.js';
+import ExistingClients from '../Dashboard/ExistingClients/ExistingClients.js';
 
 //COMPONENT
 class Clients extends React.Component {
