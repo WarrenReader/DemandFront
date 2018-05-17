@@ -7,8 +7,8 @@ const initialState = {
   , clients: []
   , users: []
   , products: []
+  , tasks: []
 }
-
 
 //PROMISE
 const FULFILLED = '_FULFILLED';
@@ -18,6 +18,7 @@ const GET_USER = 'GET_USER';
 const GET_CLIENTS = 'GET_CLIENTS';
 const GET_USERS = 'GET_USERS';
 const GET_PRODUCTS = 'GET_PRODUCTS';
+const GET_TASKS = 'GET_TASKS';
 
 //ACTION CREATORS
 export function getUser() {
@@ -60,9 +61,15 @@ export function getProducts(agencyId) {
   }
 }
 
-
-
-
+export function getTasks(agencyId) {
+  let tasks = axios.get(`/api/tasks?agencyId=${agencyId}`).then(res => {
+    return res.data
+  })
+  return {
+    type: GET_TASKS
+    , payload: tasks
+  }
+}
 
 //REDUCER
 export default function reducer(state = initialState, action) {
@@ -78,6 +85,9 @@ export default function reducer(state = initialState, action) {
 
     case GET_PRODUCTS + FULFILLED:
       return Object.assign({}, state, {products: action.payload})
+
+    case GET_TASKS + FULFILLED:
+      return Object.assign({}, state, {tasks: action.payload})
 
     default:
       return state;

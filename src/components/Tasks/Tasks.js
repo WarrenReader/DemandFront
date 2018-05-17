@@ -46,20 +46,20 @@ class Tasks extends React.Component {
 
    componentWillMount() {
 		//RETREIVE TASKS FROM DATABASE
-		const {agencies_id} = this.props.user;
+		// const {agencies_id} = this.props.user;
 
-      axios.get(`/api/tasks?agency_id=${agencies_id}`).then(result => {
-         this.setState({tasks: result.data})
-		})
+    //   axios.get(`/api/tasks?agency_id=${agencies_id}`).then(result => {
+    //      this.setState({tasks: result.data})
+		// })
 		
 		//SET DATE VALUE ON this.state.createTask.date_created
-		const createTask = Object.assign({}, this.state.createTask);
-		createTask.date_created = new Date();
-		createTask.last_update = new Date();
-		createTask.agency_employees_id = this.props.user.agency_employees_id;
-		createTask.last_update_agency_employees_id = this.props.user.agency_employees_id;
-		createTask.agencies_id = this.props.user.agencies_id;
-		this.setState({createTask})
+		// const createTask = Object.assign({}, this.state.createTask);
+		// createTask.date_created = new Date();
+		// createTask.last_update = new Date();
+		// createTask.agency_employees_id = this.props.user.agency_employees_id;
+		// createTask.last_update_agency_employees_id = this.props.user.agency_employees_id;
+		// createTask.agencies_id = this.props.user.agencies_id;
+		// this.setState({createTask})
    }
 
 
@@ -148,7 +148,8 @@ class Tasks extends React.Component {
 
    render() {
 
-      let {tasks, edit, editTask, createTask, editTaskStatus, createTaskStatus} = this.state;
+      let {edit, editTask, createTask, editTaskStatus, createTaskStatus} = this.state;
+      let {tasks} = this.props;
       let existingTasks =  tasks.map((e, i) => 
          <div key={i} className="tasks-existing-task">
             <span>Name: <span>{`${e.name}`}</span></span>
@@ -158,8 +159,6 @@ class Tasks extends React.Component {
          </div>
 		)
 		
-		console.log(this.state.tasks);
-
       return(
          <div className="tasks-parent-container">
             
@@ -289,7 +288,9 @@ class Tasks extends React.Component {
 }
 
 function mapStateToProps(state) {
-   return {user: state.user}
+   return {
+     tasks: state.tasks
+    }
 }
 
 export default connect(mapStateToProps)(Tasks)

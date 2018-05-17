@@ -27,6 +27,17 @@ module.exports = {
 		db.retrieve_products_by_agency([agencyId]).then(result => res.status(200).send(result))
 	},
 
+	getTasks: (req, res) => {
+    const {agencyId} = req.query;
+		const db = req.app.get('db');
+
+		db.retrieve_tasks([agencyId]).then(result =>
+			res.status(200).send(result)
+		)
+	},
+
+
+
 
 
 
@@ -85,15 +96,6 @@ module.exports = {
 		db.delete_user([agency_employees_id]).then(result => res.sendStatus(200))
 	},
 
-
-	getTasks: (req, res) => {
-		const { agency_id } = req.query;
-		const db = req.app.get('db');
-
-		db.retrieve_tasks([agency_id]).then(result =>
-			res.status(200).send(result)
-		)
-	},
 
 
 	updateTask: (req, res) => {
