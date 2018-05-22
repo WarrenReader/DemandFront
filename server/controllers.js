@@ -36,6 +36,18 @@ module.exports = {
 		)
 	},
 
+	updateUser: (req, res) => {
+		const {user} = req.body;
+    const db = req.app.get('db');
+    
+		db.update_user([
+      user.first_name
+      , user.last_name
+      , user.email
+      , user.position
+      , user.user_id
+			]).then(res.sendStatus(200))
+	},
 
 
 
@@ -73,20 +85,6 @@ module.exports = {
 
 
 
-	updateUser: (req, res) => {
-		const {user} = req.body;
-		const db = req.app.get('db');
-
-		db.update_user([
-			user.agency_employees_id
-			, user.username
-			, user.first_name
-			, user.last_name
-			, user.email
-			, user.phone
-			, user.position
-			, ]).then(res.sendStatus(200))
-	},
 
 
 	deleteUser: (req, res) => {

@@ -14,80 +14,74 @@ import SaveButton from '../Assets/SaveButton/SaveButton.js';
 
 //COMPONENT
 class AccountDetails extends React.Component {
-   constructor() {
-      super()
-      this.state = {
-			status: ''
-			, first_name: '' //USER INFO STARTS HERE
-			, last_name: ''
-			, email: ''
-			, position: ''
-			, user_id: '' 
-		}
+  constructor() {
+    super()
+    this.state = {
+    status: ''
+    , user: {
+      first_name: ''
+      , last_name: ''
+      , email: ''
+      , position: ''
+      , user_id: '' 
+      }
+    }
 
-		this.handleSaveButton = this.handleSaveButton.bind(this);
-   }
-
-	componentWillMount() {
-    this.setState({
-      first_name: this.props.user.first_name
-      , last_name: this.props.user.last_name
-      , email: this.props.user.email
-      , position: this.props.user.position
-      , user_id: this.props.user.user_id
-    })
+  this.handleSaveButton = this.handleSaveButton.bind(this);
+  this.updateInputField = this.updateInputField.bind(this);
   }
 
-   handleSaveButton() {
-		//Resets 'Update Successful' Message
-		this.setState({status: ''})
+	componentDidMount() {
+    this.setState({user: this.props.user})
+  }
 
-		//Add User Details To State From Redux
-		const user = {
-			first_name: this.state.first_name
-			, last_name: this.state.last_name
-			, email: this.state.email
-			, position: this.state.position
-			, user_id: this.state.user_id
-		};
-		
-		axios.put('/api/update-user', {user}).then(result => {
-			this.setState({status: result.status})
-		})
+  updateInputField(e) {
+    console.log(e.target)
+    let user = {...this.state.user, [e.target.attributes[0].value]: e.target.value}
+    this.setState({user});
+  }
 
-		this.props.getUser();
-   }
+  handleSaveButton() {
+    //Resets 'Update Successful' Message
+    this.setState({status: ''})
 
+    //Push Update To Database
+    let user = this.state.user;
+    axios.put('/api/update-user', {user}).then(result => {
+      this.setState({status: result.status})
+    })
 
-   render() {
+    //Update Redux Store
+    this.props.getUser();
+  }
 
-      const {first_name, last_name, email, position, status} = this.state;
+  render() {
+    const {status} = this.state;
+    const {first_name, last_name, email, position} = this.state.user;
 
-      return(
+    return(
 			<div className="account-parent">
 				<h1>Account Details</h1>
 				<HorizontalLine />
 
 				<div className="account-child">
 
-					<InputRow 
-						name="First Name"
+          <InputRow 
+            name="First Name"
 						value={first_name}
-						onChange={e => this.setState({first_name: e.target.value})}
+						onChange={this.updateInputField}
 					/>
 
 					<InputRow 
 						name="Last Name"
 						value={last_name}
-						onChange={e => this.setState({last_name: e.target.value})}
 					/>
 
 					<InputRow 
 						name="Email"
 						value={email}
-						onChange={e => this.setState({email: e.target.value})}
-					/>
-
+          />
+          
 					<InputRow 
 						name="Position"
 						value={position}
@@ -96,19 +90,18 @@ class AccountDetails extends React.Component {
             
 					<SaveButton name="Update" onClick={this.handleSaveButton} />
 
-					{status === 200 ? <div className="update-status">Update Successful</div> : ''}
+          {status === 200 ? <div className="update-status">Update Successful</div> : ''}
 
-            </div>
-         </div>
-      )
-   }
+          </div>
+      </div>
+    )
+  }
 }
 
-
 function mapStateToProps(state) {
-   return {
-     user: state.user
-   }
+  return {
+    user: state.user
+  }
 }
 
 export default connect(mapStateToProps, {getUser})(AccountDetails)
