@@ -6,7 +6,7 @@ import {Switch, Route} from 'react-router-dom';
 import Login from '../views/Login/Login.js';
 import _404 from '../views/404/404.js';
 import Dashboard from '../views/Dashboard/Dashboard.js';
-import Settings from '../components/AccountDetails/AccountDetails.js';
+import AccountDetailsView from '../views/AccountDetails/AccountDetails.js';
 
 
 import Agency from '../components/Agency/Agency.js';
@@ -24,7 +24,7 @@ export default (
       <Route exact path='/agency' component={Agency} />
       <Route path='/agency/products' component={Products} />
       <Route path='/agency/users' component={Users} />
-      <Route path='/settings' component={Settings} />
+      <Route path='/settings' component={AccountDetailsView} />
       <Route path='/agency/tasks' component={Tasks} />
       <Route path='/agency/roadmaps' component={Roadmaps} />
       <Route path='/clients/profile' component={ClientProfile} />

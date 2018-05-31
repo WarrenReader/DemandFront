@@ -9,3 +9,7 @@
    cursor: pointer;
    outline: none;
  }
+ 
+ .save-button:active {
+   background: rgb(145, 245, 140);
+ }

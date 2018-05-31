@@ -22,11 +22,12 @@
   position: absolute;
   top: -45px;
   right: 3px;
-  color: rgb(37, 212, 31);
+  color: rgb(37, 215, 31);
   animation: fade 0.75s linear;
 }
 
 @keyframes fade {
   0%,100% { opacity: 0; }
   100% { opacity: 1; }
+
 }

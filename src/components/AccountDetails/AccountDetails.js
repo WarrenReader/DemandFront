@@ -36,9 +36,7 @@ class AccountDetails extends React.Component {
   }
 
   updateInputField(e) {
-    console.log(e.target)
-    let user = {...this.state.user, [e.target.attributes[0].value]: e.target.value}
-    this.setState({user});
+    
   }
 
   handleSaveButton() {
@@ -49,10 +47,9 @@ class AccountDetails extends React.Component {
     let user = this.state.user;
     axios.put('/api/update-user', {user}).then(result => {
       this.setState({status: result.status})
-    })
-
-    //Update Redux Store
-    this.props.getUser();
+      //Update Redux Store
+      this.props.getUser();
+    })  
   }
 
   render() {
@@ -69,23 +66,41 @@ class AccountDetails extends React.Component {
           <InputRow 
             name="First Name"
 						value={first_name}
-						onChange={this.updateInputField}
+						onChange={(e) => {
+              let first_name = e.target.value;
+              let user = {...this.state.user, first_name};
+              this.setState({user});
+            }}
 					/>
 
 					<InputRow 
 						name="Last Name"
-						value={last_name}
+            value={last_name}
+            onChange={(e) => {
+              let last_name = e.target.value;
+              let user = {...this.state.user, last_name};
+              this.setState({user});
+            }}
 					/>
 
 					<InputRow 
 						name="Email"
-						value={email}
+            value={email}
+            onChange={(e) => {
+              let email = e.target.value;
+              let user = {...this.state.user, email};
+              this.setState({user});
+            }}
           />
           
 					<InputRow 
 						name="Position"
 						value={position}
-						onChange={e => this.setState({position: e.target.value})}
+            onChange={(e) => {
+              let position = e.target.value;
+              let user = {...this.state.user, position};
+              this.setState({user});
+            }}
 					/>
             
 					<SaveButton name="Update" onClick={this.handleSaveButton} />
